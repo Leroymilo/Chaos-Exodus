@@ -37,10 +37,9 @@ func set_pos(tile_position: Vector2i):
 	position = tile_size * Vector2(tile_pos)
 	$Fog.texture.noise.offset.x = position.x
 	$Fog.texture.noise.offset.y = position.y
-	print($Fog.texture.noise.offset)
 
 func discover():
 	$Fog.hide()
 
 func _process(delta):
-	$Fog.texture.noise.offset.z += delta *0.1
+	$Fog.texture.noise.offset.z += delta * 4

@@ -2,15 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/tile.gd" id="1_88ium"]
 
-[sub_resource type="Gradient" id="Gradient_7hguj"]
+[sub_resource type="Gradient" id="Gradient_sxh0p"]
 colors = PackedColorArray(0.2, 0.2, 0.2, 1, 0.8, 0.8, 0.8, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_8x22t"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l7jfy"]
+resource_local_to_scene = true
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sfqle"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pggt6"]
+resource_local_to_scene = true
 in_3d_space = true
-color_ramp = SubResource("Gradient_7hguj")
-noise = SubResource("FastNoiseLite_8x22t")
+normalize = false
+color_ramp = SubResource("Gradient_sxh0p")
+noise = SubResource("FastNoiseLite_l7jfy")
 
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_88ium")
@@ -19,5 +22,5 @@ script = ExtResource("1_88ium")
 centered = false
 
 [node name="Fog" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_sfqle")
+texture = SubResource("NoiseTexture2D_pggt6")
 centered = false
