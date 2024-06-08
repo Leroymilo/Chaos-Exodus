@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bgupa2ebrao8l"]
+
+[ext_resource type="Script" path="res://scripts/biome_table.gd" id="1_k7nxa"]
+
+[resource]
+script = ExtResource("1_k7nxa")

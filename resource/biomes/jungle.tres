@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://burt63a6wsfcj"]
+
+[ext_resource type="Script" path="res://scripts/biome.gd" id="1_ry2oc"]
+
+[resource]
+script = ExtResource("1_ry2oc")
+types = Array[String](["forest", "jungle"])
+weights = Array[float]([1.0, 3.0])

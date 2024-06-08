@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://buu4e12ipwb1w"]
+
+[ext_resource type="Script" path="res://scripts/tile.gd" id="1_88ium"]
+
+[sub_resource type="Gradient" id="Gradient_7hguj"]
+colors = PackedColorArray(0.2, 0.2, 0.2, 1, 0.8, 0.8, 0.8, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8x22t"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sfqle"]
+in_3d_space = true
+color_ramp = SubResource("Gradient_7hguj")
+noise = SubResource("FastNoiseLite_8x22t")
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_88ium")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Fog" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_sfqle")
+centered = false
