@@ -1,28 +1,24 @@
-extends PanelContainer
+extends Node
 
 signal confirm(text: String)
 signal cancel
 
 @export var title: String = "Choice Dialog"
 
-@onready var choice: OptionButton = $VBoxContainer/OptionButton
+@onready var choice: OptionButton = $Panel/VBoxContainer/OptionButton
 
 func _ready():
-	$VBoxContainer/Label.text = title
-	visible = false
+	$Panel/VBoxContainer/Label.text = title
+	$Panel.visible = false
 
 func start(options: Array[String]):
-	visible = true
+	$Panel.visible = true
 	choice.clear()
 	for option in options:
 		choice.add_item(option)
-	$VBoxContainer/ErrorMsg.text = ""
 
 func end():
-	visible = false
-
-func set_error(text: String):
-	$VBoxContainer/ErrorMsg.text = ""
+	$Panel.visible = false
 
 func on_cancel():
 	cancel.emit()

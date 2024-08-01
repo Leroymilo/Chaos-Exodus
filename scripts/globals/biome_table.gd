@@ -32,9 +32,19 @@ static func get_biome(key):
 static func get_type(key):
 	return get_biome(key).get_type()
 
-static func add_biome(biome_name: String):
-	table[biome_name] = Biome.new().init(list.size(), biome_name)
+static func add_biome(biome_name: String) -> Biome:
+	var biome = Biome.new().init(list.size(), biome_name)
+	table[biome_name] = biome
 	list.append(biome_name)
+	return biome
+
+static func remove_biome(index: int):
+	var type_name = list[index]
+	list.pop_at(index)
+	table.erase(type_name)
+	
+	for i in range(index, list.size()):
+		table[list[i]].id = i
 
 static func save_biome(biome_name: String, new_id: int = -1) -> bool:
 	if not table.has(biome_name): return false
@@ -64,7 +74,7 @@ static func save():
 	if not dir: return
 	
 	for file_name in dir.get_files():
-		if file_name.get_extension() == EXT.substr(1): continue
+		if file_name.get_extension() != EXT.substr(1): continue
 		var key = file_name.trim_suffix(EXT)
 		if table.has(key): continue
 		dir.remove(file_name)

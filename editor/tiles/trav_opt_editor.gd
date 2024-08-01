@@ -23,8 +23,7 @@ func init(p_trav_opt: TraversalOption):
 	next_state.value = trav_opt.next_state
 	
 	for i in range(trav_opt.tools.list.size()):
-		var tool_edit = ToolEditor.instantiate()
-		add_tool(tool_edit, i)
+		add_tool(i)
 
 func set_id(new_id: int):
 	id = new_id
@@ -35,6 +34,9 @@ func create_tool():
 	for tool in Enums.TOOL_NAMES:
 		if not trav_opt.tools.has(tool):
 			pos_tools.append(tool)
+	if pos_tools.size() == 0:
+		error_message.emit("All tools are already used in this Traversal Option.")
+		return
 	$NewToolDialog.start(pos_tools)
 
 func on_new_tool_dialog_cancel():
@@ -42,11 +44,11 @@ func on_new_tool_dialog_cancel():
 
 func on_new_tool_dialog_confirm(tool_name: String):
 	var tool_id = trav_opt.add_tool(tool_name)
-	var tool_edit = ToolEditor.instantiate()
-	add_tool(tool_edit, tool_id)
+	add_tool(tool_id)
 	$NewToolDialog.end()
 
-func add_tool(tool_edit: PanelContainer, tool_id: int):
+func add_tool(tool_id: int):
+	var tool_edit = ToolEditor.instantiate()
 	tools.add_child(tool_edit)
 	tool_edit.remove.connect(remove_tool)
 	tool_edit.error_message.connect(on_tool_error)

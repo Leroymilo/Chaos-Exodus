@@ -30,29 +30,6 @@ theme_override_constants/margin_bottom = 3
 [node name="HContainer" type="VBoxContainer" parent="Margins"]
 layout_mode = 2
 
-[node name="VContainer" type="HBoxContainer" parent="Margins/HContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Margins/HContainer/VContainer"]
-layout_mode = 2
-text = "Current Biome: "
-
-[node name="BiomeSelector" type="OptionButton" parent="Margins/HContainer/VContainer"]
-layout_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="Margins/HContainer/VContainer"]
-layout_mode = 2
-
-[node name="AddTileTypeButton" type="Button" parent="Margins/HContainer/VContainer"]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("1_hwnva")
-theme_override_styles/hover = ExtResource("2_i1f8g")
-theme_override_styles/pressed = ExtResource("3_ecj5f")
-text = "Add Tile Type"
-
-[node name="HSeparator" type="HSeparator" parent="Margins/HContainer"]
-layout_mode = 2
-
 [node name="Scroll" type="ScrollContainer" parent="Margins/HContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -63,45 +40,34 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TileTypes" type="HFlowContainer" parent="Margins/HContainer"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="HSeparator2" type="HSeparator" parent="Margins/HContainer"]
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="Margins/HContainer"]
+[node name="ButtonBar" type="HBoxContainer" parent="Margins/HContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+
+[node name="AddBiomeButton" type="Button" parent="Margins/HContainer/ButtonBar"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_hwnva")
+theme_override_styles/hover = ExtResource("2_i1f8g")
+theme_override_styles/pressed = ExtResource("3_ecj5f")
+text = "Add Biome"
+
+[node name="Filler" type="Control" parent="Margins/HContainer/ButtonBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveButton" type="Button" parent="Margins/HContainer/ButtonBar"]
+layout_mode = 2
 theme_override_styles/normal = ExtResource("1_hwnva")
 theme_override_styles/hover = ExtResource("2_i1f8g")
 theme_override_styles/pressed = ExtResource("3_ecj5f")
 text = "Save All Biomes Changes"
 
 [node name="NewBiomeDialog" parent="." instance=ExtResource("7_t50jj")]
-visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 145.0
-offset_bottom = 130.0
-grow_horizontal = 1
-grow_vertical = 1
+title = "Enter Biome Name"
 
-[node name="DeleteDialog" type="ConfirmationDialog" parent="."]
-title = "Delete Tile Type"
-initial_position = 2
-size = Vector2i(200, 106)
-ok_button_text = "Delete it"
-dialog_text = "This cannot be undone!"
-cancel_button_text = "Don't delete"
-
-[connection signal="item_selected" from="Margins/HContainer/VContainer/BiomeSelector" to="." method="on_biome_selected"]
-[connection signal="pressed" from="Margins/HContainer/VContainer/AddTileTypeButton" to="." method="create_tile_type"]
+[connection signal="pressed" from="Margins/HContainer/ButtonBar/AddBiomeButton" to="." method="initialize_new_biome"]
+[connection signal="pressed" from="Margins/HContainer/ButtonBar/SaveButton" to="." method="save"]
+[connection signal="cancel" from="NewBiomeDialog" to="." method="on_new_biome_dialog_cancel"]
+[connection signal="confirm" from="NewBiomeDialog" to="." method="on_new_biome_dialog_confirm"]

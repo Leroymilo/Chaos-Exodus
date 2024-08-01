@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b522wosfir4xj"]
+[gd_scene load_steps=9 format=3 uid="uid://b522wosfir4xj"]
 
 [ext_resource type="Script" path="res://editor/tiles/tile_editor.gd" id="1_kkfuc"]
 [ext_resource type="StyleBox" uid="uid://dvjd1in66hn77" path="res://editor/styles/green_button_normal.tres" id="3_q5kkx"]
 [ext_resource type="StyleBox" uid="uid://7p2fi2ylt6eo" path="res://editor/styles/green_button_hover.tres" id="4_v7p0v"]
 [ext_resource type="StyleBox" uid="uid://dpsk4ax5aakty" path="res://editor/styles/green_button_pressed.tres" id="5_1mtwh"]
 [ext_resource type="PackedScene" uid="uid://dgnm47wqr1cq2" path="res://editor/text_dialog.tscn" id="5_2q37w"]
-[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="6_wldvt"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="6_aaujq"]
+[ext_resource type="StyleBox" uid="uid://cskjb3rqqmtye" path="res://editor/styles/red_button_hover.tres" id="6_bm817"]
 [ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="7_y5jfr"]
 
 [node name="Tile Editor" type="Control"]
@@ -126,8 +127,8 @@ size_flags_horizontal = 8
 
 [node name="RemoveButton" type="Button" parent="Margins/VContainer/MetaButtons"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("6_wldvt")
-theme_override_styles/hover = ExtResource("6_wldvt")
+theme_override_styles/normal = ExtResource("6_aaujq")
+theme_override_styles/hover = ExtResource("6_bm817")
 theme_override_styles/pressed = ExtResource("7_y5jfr")
 text = "Delete Tile Type"
 

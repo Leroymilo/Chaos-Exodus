@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dmxuaxg66n042"]
+[gd_scene load_steps=10 format=3 uid="uid://dmxuaxg66n042"]
 
 [ext_resource type="StyleBox" uid="uid://bs8fqld6wxayo" path="res://editor/styles/panel_container_dark.tres" id="1_jwtka"]
 [ext_resource type="Script" path="res://editor/tiles/trav_opt_editor.gd" id="2_kohyq"]
 [ext_resource type="StyleBox" uid="uid://dvjd1in66hn77" path="res://editor/styles/green_button_normal.tres" id="3_n3h3d"]
 [ext_resource type="StyleBox" uid="uid://7p2fi2ylt6eo" path="res://editor/styles/green_button_hover.tres" id="4_l222b"]
 [ext_resource type="StyleBox" uid="uid://dpsk4ax5aakty" path="res://editor/styles/green_button_pressed.tres" id="5_7h2e1"]
-[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="6_tued8"]
+[ext_resource type="StyleBox" uid="uid://cskjb3rqqmtye" path="res://editor/styles/red_button_hover.tres" id="7_ae8lm"]
 [ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="7_m1tu7"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="7_qmfil"]
 [ext_resource type="PackedScene" uid="uid://bvvwu54ysahe5" path="res://editor/choice_dialog.tscn" id="8_00wwp"]
 
 [node name="Traversal Option Editor" type="PanelContainer"]
@@ -81,14 +82,13 @@ layout_mode = 2
 
 [node name="Remove" type="Button" parent="Container"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("6_tued8")
-theme_override_styles/hover = ExtResource("6_tued8")
+theme_override_styles/normal = ExtResource("7_qmfil")
+theme_override_styles/hover = ExtResource("7_ae8lm")
 theme_override_styles/pressed = ExtResource("7_m1tu7")
 text = "Remove Traversal Option"
 
 [node name="NewToolDialog" parent="." instance=ExtResource("8_00wwp")]
-visible = false
-layout_mode = 2
+title = "Choose Tool"
 
 [connection signal="value_changed" from="Container/DelayCont/Delay" to="." method="on_delay_changed"]
 [connection signal="value_changed" from="Container/VisModCont/VisMod" to="." method="on_vis_mod_changed"]

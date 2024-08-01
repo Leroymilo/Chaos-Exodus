@@ -59,7 +59,7 @@ static func save():
 	if not dir: return
 	
 	for file_name in dir.get_files():
-		if file_name.get_extension() == EXT.substr(1): continue
+		if file_name.get_extension() != EXT.substr(1): continue
 		var key = file_name.trim_suffix(EXT)
 		if table.has(key): continue
 		dir.remove(file_name)

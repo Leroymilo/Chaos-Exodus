@@ -3,49 +3,48 @@
 [ext_resource type="Script" path="res://editor/text_dialog.gd" id="1_meorg"]
 [ext_resource type="StyleBox" uid="uid://du3esyml8sl2w" path="res://editor/styles/panel_container.tres" id="1_ye70f"]
 
-[node name="TextDialog" type="PanelContainer"]
+[node name="TextDialog" type="Node"]
+script = ExtResource("1_meorg")
+
+[node name="Panel" type="PanelContainer" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -72.5
-offset_top = -65.0
+offset_top = -51.5
 offset_right = 72.5
-offset_bottom = 65.0
+offset_bottom = 51.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = ExtResource("1_ye70f")
-script = ExtResource("1_meorg")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
 layout_mode = 2
-text = "Text Dialogue"
+text = "Text Dialog"
 horizontal_alignment = 1
 
-[node name="TextEdit" type="LineEdit" parent="VBoxContainer"]
+[node name="TextEdit" type="LineEdit" parent="Panel/VBoxContainer"]
 layout_mode = 2
 select_all_on_focus = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
 
-[node name="ConfirmButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="ConfirmButton" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Confirm"
 
-[node name="ErrorMsg" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/CancelButton" to="." method="on_cancel"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/ConfirmButton" to="." method="on_confirm"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/CancelButton" to="." method="on_cancel"]
+[connection signal="pressed" from="Panel/VBoxContainer/HBoxContainer/ConfirmButton" to="." method="on_confirm"]

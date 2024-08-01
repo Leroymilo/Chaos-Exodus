@@ -4,7 +4,7 @@ const StateEditor = preload("res://editor/tiles/state_editor.tscn")
 
 const NEW_TYPE_TEXT = "New Tile Type"
 
-const NAME_FORMAT_ERROR = "The name can only contain:\n- lowercase letters\n- numbers\n- underscores."
+const NAME_FORMAT_ERROR = "The name can only contain: lowercase letters, numbers, underscores."
 const NAME_EXISTS_ERROR = "This type name is already used."
 
 signal error_message(msg: String)
@@ -69,8 +69,7 @@ func load_type_data(index: int):
 	
 	# loading states
 	for i in range(type.states.size()):
-		var state_edit = StateEditor.instantiate()
-		add_state(state_edit, type.states[i])
+		add_state(type.states[i])
 	
 	# TODO: load base layers
 	
@@ -83,10 +82,10 @@ func load_type_data(index: int):
 func on_new_type_dialog_confirm(type_name: String):
 	# Checking name validity
 	if not type_name_regex.search(type_name):
-		$NewTypeDialog.set_error(NAME_FORMAT_ERROR)
+		error_message.emit(NAME_FORMAT_ERROR)
 		return
 	if TileTypeTable.has(type_name):
-		$NewTypeDialog.set_error(NAME_EXISTS_ERROR)
+		error_message.emit(NAME_EXISTS_ERROR)
 		return
 	
 	TileTypeTable.add_type(type_name)
@@ -102,7 +101,7 @@ func on_new_type_dialog_confirm(type_name: String):
 
 func on_new_type_dialog_cancel():
 	if last_type_index == -1:
-		$NewTypeDialog.set_error("Cannot Cancel")
+		error_message.emit("Cannot Cancel. A Tile Type is required.")
 		return
 	
 	type_selector.select(last_type_index)
@@ -114,10 +113,10 @@ func save():
 
 func create_state():
 	var new_state = type.add_state()
-	var state_edit = StateEditor.instantiate()
-	add_state(state_edit, new_state)
+	add_state(new_state)
 
-func add_state(state_edit: PanelContainer, tile_state: TileState):
+func add_state(tile_state: TileState):
+	var state_edit = StateEditor.instantiate()
 	states.add_child(state_edit)
 	state_edit.remove.connect(remove_state)
 	state_edit.error_message.connect(on_state_error)

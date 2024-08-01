@@ -42,4 +42,5 @@ layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.39, 0.39, 1)
 text = "Errors and warnings will appear here."
 
-[connection signal="error_message" from="VBoxContainer/TabContainer/Tile Editor" to="." method="on_tile_editor_error_message"]
+[connection signal="error_message" from="VBoxContainer/TabContainer/Tile Editor" to="." method="on_error_message"]
+[connection signal="error_message" from="VBoxContainer/TabContainer/Biome Editor" to="." method="on_error_message"]

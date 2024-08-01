@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdqtk03v2n4ma"]
+[gd_scene load_steps=9 format=3 uid="uid://bdqtk03v2n4ma"]
 
 [ext_resource type="StyleBox" uid="uid://du3esyml8sl2w" path="res://editor/styles/panel_container.tres" id="1_3u4lq"]
 [ext_resource type="Script" path="res://editor/tiles/state_editor.gd" id="2_ar5vw"]
 [ext_resource type="StyleBox" uid="uid://dvjd1in66hn77" path="res://editor/styles/green_button_normal.tres" id="3_520p1"]
 [ext_resource type="StyleBox" uid="uid://7p2fi2ylt6eo" path="res://editor/styles/green_button_hover.tres" id="4_4gon6"]
 [ext_resource type="StyleBox" uid="uid://dpsk4ax5aakty" path="res://editor/styles/green_button_pressed.tres" id="5_t0lgk"]
-[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="7_t6s57"]
+[ext_resource type="StyleBox" uid="uid://cskjb3rqqmtye" path="res://editor/styles/red_button_hover.tres" id="7_hat5s"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="7_j0g4b"]
 [ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="8_astwn"]
 
 [node name="StateEditor" type="PanelContainer"]
@@ -86,8 +87,8 @@ layout_mode = 2
 
 [node name="RemoveButton" type="Button" parent="Scroll/Container"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("7_t6s57")
-theme_override_styles/hover = ExtResource("7_t6s57")
+theme_override_styles/normal = ExtResource("7_j0g4b")
+theme_override_styles/hover = ExtResource("7_hat5s")
 theme_override_styles/pressed = ExtResource("8_astwn")
 text = "Remove State"
 

@@ -31,8 +31,7 @@ func init(p_state: TileState):
 	
 	for i in range(state.traversal_options.size()):
 		var trav_opt = state.traversal_options[i]
-		var trav_opt_edit = TravOptEdit.instantiate()
-		add_trav_opt(trav_opt_edit, trav_opt)
+		add_trav_opt(trav_opt)
 
 func set_id(new_id: int):
 	id = new_id
@@ -40,10 +39,10 @@ func set_id(new_id: int):
 
 func create_trav_opt():
 	var new_trav_opt = state.add_trav_opt()
-	var trav_opt_edit = TravOptEdit.instantiate()
-	add_trav_opt(trav_opt_edit, new_trav_opt)
+	add_trav_opt(new_trav_opt)
 
-func add_trav_opt(trav_opt_edit: PanelContainer, trav_opt: TraversalOption):
+func add_trav_opt(trav_opt: TraversalOption):
+	var trav_opt_edit = TravOptEdit.instantiate()
 	trav_opts.add_child(trav_opt_edit)
 	trav_opt_edit.remove.connect(remove_trav_opt)
 	trav_opt_edit.error_message.connect(on_trav_opt_error)
