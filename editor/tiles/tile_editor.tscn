@@ -1,0 +1,174 @@
+[gd_scene load_steps=8 format=3 uid="uid://b522wosfir4xj"]
+
+[ext_resource type="Script" path="res://editor/tiles/tile_editor.gd" id="1_kkfuc"]
+[ext_resource type="StyleBox" uid="uid://dvjd1in66hn77" path="res://editor/styles/green_button_normal.tres" id="3_q5kkx"]
+[ext_resource type="StyleBox" uid="uid://7p2fi2ylt6eo" path="res://editor/styles/green_button_hover.tres" id="4_v7p0v"]
+[ext_resource type="StyleBox" uid="uid://dpsk4ax5aakty" path="res://editor/styles/green_button_pressed.tres" id="5_1mtwh"]
+[ext_resource type="PackedScene" uid="uid://dgnm47wqr1cq2" path="res://editor/text_dialog.tscn" id="5_2q37w"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="6_wldvt"]
+[ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="7_y5jfr"]
+
+[node name="Tile Editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kkfuc")
+
+[node name="Margins" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VContainer" type="VBoxContainer" parent="Margins"]
+layout_mode = 2
+
+[node name="TypeSelectContainer" type="HBoxContainer" parent="Margins/VContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margins/VContainer/TypeSelectContainer"]
+layout_mode = 2
+text = "Current Type: "
+
+[node name="TypeSelector" type="OptionButton" parent="Margins/VContainer/TypeSelectContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Choose what tile type to edit"
+
+[node name="HSeparator" type="HSeparator" parent="Margins/VContainer"]
+layout_mode = 2
+
+[node name="HContainer" type="HBoxContainer" parent="Margins/VContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BaseProperties" type="VBoxContainer" parent="Margins/VContainer/HContainer"]
+layout_mode = 2
+
+[node name="StateCont" type="HBoxContainer" parent="Margins/VContainer/HContainer/BaseProperties"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margins/VContainer/HContainer/BaseProperties/StateCont"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Initial state:"
+
+[node name="State" type="SpinBox" parent="Margins/VContainer/HContainer/BaseProperties/StateCont"]
+layout_mode = 2
+
+[node name="VisCont" type="HBoxContainer" parent="Margins/VContainer/HContainer/BaseProperties"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margins/VContainer/HContainer/BaseProperties/VisCont"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Visibility:"
+
+[node name="Visibility" type="SpinBox" parent="Margins/VContainer/HContainer/BaseProperties/VisCont"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Margins/VContainer/HContainer/BaseProperties"]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Margins/VContainer/HContainer/BaseProperties"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="BaseLayers" type="VBoxContainer" parent="Margins/VContainer/HContainer/BaseProperties/Scroll"]
+layout_mode = 2
+
+[node name="AddLayerButton" type="Button" parent="Margins/VContainer/HContainer/BaseProperties"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_q5kkx")
+theme_override_styles/hover = ExtResource("4_v7p0v")
+theme_override_styles/pressed = ExtResource("5_1mtwh")
+text = "Add Base Layer Sprite"
+
+[node name="VSeparator" type="VSeparator" parent="Margins/VContainer/HContainer"]
+layout_mode = 2
+
+[node name="StatesContainer" type="VBoxContainer" parent="Margins/VContainer/HContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddStateButton" type="Button" parent="Margins/VContainer/HContainer/StatesContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = ExtResource("3_q5kkx")
+theme_override_styles/hover = ExtResource("4_v7p0v")
+theme_override_styles/pressed = ExtResource("5_1mtwh")
+text = "Add State"
+
+[node name="Scroll" type="ScrollContainer" parent="Margins/VContainer/HContainer/StatesContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 0
+
+[node name="States" type="HBoxContainer" parent="Margins/VContainer/HContainer/StatesContainer/Scroll"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="Margins/VContainer"]
+layout_mode = 2
+
+[node name="MetaButtons" type="HBoxContainer" parent="Margins/VContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="RemoveButton" type="Button" parent="Margins/VContainer/MetaButtons"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_wldvt")
+theme_override_styles/hover = ExtResource("6_wldvt")
+theme_override_styles/pressed = ExtResource("7_y5jfr")
+text = "Delete Tile Type"
+
+[node name="SaveButton" type="Button" parent="Margins/VContainer/MetaButtons"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_styles/normal = ExtResource("3_q5kkx")
+theme_override_styles/hover = ExtResource("4_v7p0v")
+theme_override_styles/pressed = ExtResource("5_1mtwh")
+text = "Save All Tile Types Changes"
+
+[node name="NewTypeDialog" parent="." instance=ExtResource("5_2q37w")]
+visible = false
+layout_mode = 1
+title = "Enter Tile Type Name"
+
+[node name="SpriteSheetSelector" type="FileDialog" parent="."]
+title = "Select a Sprite-sheet"
+initial_position = 2
+size = Vector2i(400, 260)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+mode_overrides_title = false
+file_mode = 0
+root_subfolder = "res://sprites/tiles/"
+filters = PackedStringArray("*.png ; PNG file")
+
+[node name="DeleteDialog" type="ConfirmationDialog" parent="."]
+title = "Delete Tile Type"
+initial_position = 2
+size = Vector2i(200, 106)
+ok_button_text = "Delete it"
+dialog_text = "This cannot be undone!"
+cancel_button_text = "Don't delete"
+
+[connection signal="item_selected" from="Margins/VContainer/TypeSelectContainer/TypeSelector" to="." method="on_tile_type_selected"]
+[connection signal="value_changed" from="Margins/VContainer/HContainer/BaseProperties/StateCont/State" to="." method="on_state_changed"]
+[connection signal="value_changed" from="Margins/VContainer/HContainer/BaseProperties/VisCont/Visibility" to="." method="on_vis_changed"]
+[connection signal="pressed" from="Margins/VContainer/HContainer/StatesContainer/AddStateButton" to="." method="create_state"]
+[connection signal="pressed" from="Margins/VContainer/MetaButtons/RemoveButton" to="DeleteDialog" method="show"]
+[connection signal="pressed" from="Margins/VContainer/MetaButtons/SaveButton" to="." method="save"]
+[connection signal="cancel" from="NewTypeDialog" to="." method="on_new_type_dialog_cancel"]
+[connection signal="confirm" from="NewTypeDialog" to="." method="on_new_type_dialog_confirm"]
+[connection signal="confirmed" from="DeleteDialog" to="." method="on_remove"]

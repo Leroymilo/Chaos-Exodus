@@ -11,17 +11,10 @@ config_version=5
 [application]
 
 config/name="Chaos Exodus"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://editor/editor.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://sprites/tiles/elf_village.png"
 
 [autoload]
 
-Enums="*res://scripts/enums.gd"
-
-[display]
-
-window/size/viewport_width=512
-window/size/viewport_height=320
-window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
+Enums="*res://scripts/globals/enums.gd"

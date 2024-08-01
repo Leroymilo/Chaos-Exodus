@@ -1,3 +1,72 @@
-[gd_resource type="Resource" format=3 uid="uid://cclyj6q0gfcde"]
+[gd_resource type="Resource" script_class="TileType" load_steps=13 format=3]
+
+[ext_resource type="Script" path="res://scripts/tile_data/type.gd" id="1_mm4th"]
+[ext_resource type="Script" path="res://scripts/tile_data/state.gd" id="2_k2vxc"]
+[ext_resource type="Script" path="res://scripts/tile_data/traversal_option.gd" id="3_xp4jy"]
+[ext_resource type="Script" path="res://scripts/structures/ordered_dict.gd" id="4_kilwt"]
+
+[sub_resource type="Resource" id="Resource_v6ids"]
+script = ExtResource("4_kilwt")
+list = ["Torch"]
+dict = {
+"Torch": 1
+}
+
+[sub_resource type="Resource" id="Resource_ehrdv"]
+script = ExtResource("3_xp4jy")
+id = 0
+delay = 1
+vis_modif = -5
+next_state = 0
+tools = SubResource("Resource_v6ids")
+
+[sub_resource type="Resource" id="Resource_mwq45"]
+script = ExtResource("4_kilwt")
+list = ["Ropes"]
+dict = {
+"Ropes": 1
+}
+
+[sub_resource type="Resource" id="Resource_jcoo1"]
+script = ExtResource("3_xp4jy")
+id = 1
+delay = 1
+vis_modif = 0
+next_state = 1
+tools = SubResource("Resource_mwq45")
+
+[sub_resource type="Resource" id="Resource_ns1kb"]
+script = ExtResource("2_k2vxc")
+id = 0
+obstruction = 4
+layer_paths = Array[String]([])
+traversal_options = Array[ExtResource("3_xp4jy")]([SubResource("Resource_ehrdv"), SubResource("Resource_jcoo1")])
+
+[sub_resource type="Resource" id="Resource_cu4l8"]
+script = ExtResource("4_kilwt")
+list = []
+dict = {}
+
+[sub_resource type="Resource" id="Resource_m4rr6"]
+script = ExtResource("3_xp4jy")
+id = 0
+delay = 1
+vis_modif = 0
+next_state = 1
+tools = SubResource("Resource_cu4l8")
+
+[sub_resource type="Resource" id="Resource_obeqv"]
+script = ExtResource("2_k2vxc")
+id = 1
+obstruction = 4
+layer_paths = Array[String]([])
+traversal_options = Array[ExtResource("3_xp4jy")]([SubResource("Resource_m4rr6")])
 
 [resource]
+script = ExtResource("1_mm4th")
+id = 2
+name = "mount"
+state = 0
+visibility = 6
+states = Array[ExtResource("2_k2vxc")]([SubResource("Resource_ns1kb"), SubResource("Resource_obeqv")])
+base_layer_paths = Array[String]([])

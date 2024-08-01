@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://bdqtk03v2n4ma"]
+
+[ext_resource type="StyleBox" uid="uid://du3esyml8sl2w" path="res://editor/styles/panel_container.tres" id="1_3u4lq"]
+[ext_resource type="Script" path="res://editor/tiles/state_editor.gd" id="2_ar5vw"]
+[ext_resource type="StyleBox" uid="uid://dvjd1in66hn77" path="res://editor/styles/green_button_normal.tres" id="3_520p1"]
+[ext_resource type="StyleBox" uid="uid://7p2fi2ylt6eo" path="res://editor/styles/green_button_hover.tres" id="4_4gon6"]
+[ext_resource type="StyleBox" uid="uid://dpsk4ax5aakty" path="res://editor/styles/green_button_pressed.tres" id="5_t0lgk"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="7_t6s57"]
+[ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="8_astwn"]
+
+[node name="StateEditor" type="PanelContainer"]
+offset_right = 10.0
+offset_bottom = 10.0
+theme_override_styles/panel = ExtResource("1_3u4lq")
+script = ExtResource("2_ar5vw")
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="Container" type="VBoxContainer" parent="Scroll"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Container"]
+layout_mode = 2
+text = "State X"
+horizontal_alignment = 1
+
+[node name="ObstructCont" type="HBoxContainer" parent="Scroll/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Scroll/Container/ObstructCont"]
+layout_mode = 2
+text = "Obstruction: "
+
+[node name="Obstruction" type="SpinBox" parent="Scroll/Container/ObstructCont"]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+
+[node name="HSeparator" type="HSeparator" parent="Scroll/Container"]
+layout_mode = 2
+
+[node name="LayersButton" type="Button" parent="Scroll/Container"]
+visible = false
+layout_mode = 2
+text = "Layer Sprites"
+
+[node name="LayersCont" type="VBoxContainer" parent="Scroll/Container"]
+layout_mode = 2
+
+[node name="Layers" type="VBoxContainer" parent="Scroll/Container/LayersCont"]
+layout_mode = 2
+
+[node name="AddLayerButton" type="Button" parent="Scroll/Container/LayersCont"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_520p1")
+theme_override_styles/hover = ExtResource("4_4gon6")
+theme_override_styles/pressed = ExtResource("5_t0lgk")
+text = "Add Layer"
+
+[node name="HSeparator2" type="HSeparator" parent="Scroll/Container"]
+layout_mode = 2
+
+[node name="TravOptsButton" type="Button" parent="Scroll/Container"]
+visible = false
+layout_mode = 2
+text = "Traversal Options"
+
+[node name="TravOptsCont" type="VBoxContainer" parent="Scroll/Container"]
+layout_mode = 2
+
+[node name="TravOpts" type="VBoxContainer" parent="Scroll/Container/TravOptsCont"]
+layout_mode = 2
+
+[node name="AddTravOptButton" type="Button" parent="Scroll/Container/TravOptsCont"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_520p1")
+theme_override_styles/hover = ExtResource("4_4gon6")
+theme_override_styles/pressed = ExtResource("5_t0lgk")
+text = "Add Traversal Option"
+
+[node name="HSeparator3" type="HSeparator" parent="Scroll/Container"]
+layout_mode = 2
+
+[node name="RemoveButton" type="Button" parent="Scroll/Container"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("7_t6s57")
+theme_override_styles/hover = ExtResource("7_t6s57")
+theme_override_styles/pressed = ExtResource("8_astwn")
+text = "Remove State"
+
+[connection signal="value_changed" from="Scroll/Container/ObstructCont/Obstruction" to="." method="on_obstruction_changed"]
+[connection signal="pressed" from="Scroll/Container/TravOptsCont/AddTravOptButton" to="." method="create_trav_opt"]
+[connection signal="pressed" from="Scroll/Container/RemoveButton" to="." method="on_remove"]

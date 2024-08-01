@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbqx4hcneey3c"]
+
+[ext_resource type="PackedScene" uid="uid://b522wosfir4xj" path="res://editor/tiles/tile_editor.tscn" id="1_a6llr"]
+[ext_resource type="Script" path="res://editor/editor.gd" id="1_ig71h"]
+[ext_resource type="PackedScene" uid="uid://7r5fxf3507a1" path="res://editor/biomes/biome_table_editor.tscn" id="2_7uoe4"]
+[ext_resource type="PackedScene" uid="uid://claegm6e5mqo5" path="res://editor/map/map_editor.tscn" id="3_t5x0i"]
+
+[node name="Editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ig71h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Tile Editor" parent="VBoxContainer/TabContainer" instance=ExtResource("1_a6llr")]
+layout_mode = 2
+
+[node name="Biome Editor" parent="VBoxContainer/TabContainer" instance=ExtResource("2_7uoe4")]
+visible = false
+layout_mode = 2
+
+[node name="Map Editor" parent="VBoxContainer/TabContainer" instance=ExtResource("3_t5x0i")]
+visible = false
+layout_mode = 2
+
+[node name="Message" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.39, 0.39, 1)
+text = "Errors and warnings will appear here."
+
+[connection signal="error_message" from="VBoxContainer/TabContainer/Tile Editor" to="." method="on_tile_editor_error_message"]

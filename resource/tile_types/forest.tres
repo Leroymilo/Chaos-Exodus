@@ -1,3 +1,35 @@
-[gd_resource type="Resource" format=3 uid="uid://d16i68n1xufge"]
+[gd_resource type="Resource" script_class="TileType" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/tile_data/type.gd" id="1_66po2"]
+[ext_resource type="Script" path="res://scripts/tile_data/state.gd" id="2_w7vi1"]
+[ext_resource type="Script" path="res://scripts/tile_data/traversal_option.gd" id="3_d5h6a"]
+[ext_resource type="Script" path="res://scripts/structures/ordered_dict.gd" id="4_p7ss4"]
+
+[sub_resource type="Resource" id="Resource_467jm"]
+script = ExtResource("4_p7ss4")
+list = []
+dict = {}
+
+[sub_resource type="Resource" id="Resource_uf16a"]
+script = ExtResource("3_d5h6a")
+id = 0
+delay = 1
+vis_modif = 0
+next_state = 0
+tools = SubResource("Resource_467jm")
+
+[sub_resource type="Resource" id="Resource_t3myr"]
+script = ExtResource("2_w7vi1")
+id = 0
+obstruction = 2
+layer_paths = Array[String]([])
+traversal_options = Array[ExtResource("3_d5h6a")]([SubResource("Resource_uf16a")])
 
 [resource]
+script = ExtResource("1_66po2")
+id = 0
+name = "forest"
+state = 0
+visibility = 3
+states = Array[ExtResource("2_w7vi1")]([SubResource("Resource_t3myr")])
+base_layer_paths = Array[String]([])

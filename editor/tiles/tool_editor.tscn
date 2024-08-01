@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6jj6dvclbm1p"]
+
+[ext_resource type="StyleBox" uid="uid://du3esyml8sl2w" path="res://editor/styles/panel_container.tres" id="1_rd5ri"]
+[ext_resource type="Script" path="res://editor/tiles/tool_editor.gd" id="2_kaced"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="3_agwbx"]
+[ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="4_vla6h"]
+
+[node name="Tool Option Editor" type="PanelContainer"]
+offset_right = 129.0
+offset_bottom = 77.0
+theme_override_styles/panel = ExtResource("1_rd5ri")
+script = ExtResource("2_kaced")
+
+[node name="Container" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Tool" type="Label" parent="Container"]
+layout_mode = 2
+text = "Tool"
+horizontal_alignment = 1
+
+[node name="Count" type="SpinBox" parent="Container"]
+layout_mode = 2
+value = 1.0
+rounded = true
+suffix = "used"
+
+[node name="Remove" type="Button" parent="Container"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_agwbx")
+theme_override_styles/hover = ExtResource("3_agwbx")
+theme_override_styles/pressed = ExtResource("4_vla6h")
+text = "Remove Tool"
+
+[connection signal="value_changed" from="Container/Count" to="." method="on_count_changed"]
+[connection signal="pressed" from="Container/Remove" to="." method="on_remove"]

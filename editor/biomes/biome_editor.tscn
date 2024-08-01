@@ -1,0 +1,56 @@
+[gd_scene load_steps=10 format=3 uid="uid://poj8akq5wsod"]
+
+[ext_resource type="StyleBox" uid="uid://du3esyml8sl2w" path="res://editor/styles/panel_container.tres" id="1_520bf"]
+[ext_resource type="StyleBox" uid="uid://dvjd1in66hn77" path="res://editor/styles/green_button_normal.tres" id="1_hwnva"]
+[ext_resource type="Script" path="res://editor/biomes/biome_editor.gd" id="1_lcgt3"]
+[ext_resource type="StyleBox" uid="uid://7p2fi2ylt6eo" path="res://editor/styles/green_button_hover.tres" id="2_i1f8g"]
+[ext_resource type="StyleBox" uid="uid://dpsk4ax5aakty" path="res://editor/styles/green_button_pressed.tres" id="3_ecj5f"]
+[ext_resource type="PackedScene" uid="uid://bvvwu54ysahe5" path="res://editor/choice_dialog.tscn" id="6_cr8qw"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_normal.tres" id="6_tle2g"]
+[ext_resource type="StyleBox" uid="uid://d2m4i5lydkkq1" path="res://editor/styles/red_button_hover.tres" id="7_86fph"]
+[ext_resource type="StyleBox" uid="uid://bxburqto0accy" path="res://editor/styles/red_button_pressed.tres" id="8_mv3m1"]
+
+[node name="Biome Editor" type="PanelContainer"]
+offset_right = 10.0
+offset_bottom = 10.0
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("1_520bf")
+script = ExtResource("1_lcgt3")
+
+[node name="VContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VContainer"]
+layout_mode = 2
+text = "<biome name>"
+
+[node name="HSeparator" type="HSeparator" parent="VContainer"]
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="VContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="TileTypes" type="VBoxContainer" parent="VContainer/Scroll"]
+layout_mode = 2
+
+[node name="AddTypeButton" type="Button" parent="VContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("1_hwnva")
+theme_override_styles/hover = ExtResource("2_i1f8g")
+theme_override_styles/pressed = ExtResource("3_ecj5f")
+text = "Add Tile Type"
+
+[node name="HSeparator2" type="HSeparator" parent="VContainer"]
+layout_mode = 2
+
+[node name="RemoveButton" type="Button" parent="VContainer"]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_tle2g")
+theme_override_styles/hover = ExtResource("7_86fph")
+theme_override_styles/pressed = ExtResource("8_mv3m1")
+text = "Delete Biome"
+
+[node name="AddTypeDialog" parent="." instance=ExtResource("6_cr8qw")]
+visible = false
+layout_mode = 2
