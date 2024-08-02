@@ -32,4 +32,4 @@ name = "forest"
 state = 0
 visibility = 3
 states = Array[ExtResource("2_w7vi1")]([SubResource("Resource_t3myr")])
-base_layer_paths = Array[String]([])
+base_layer_paths = Array[String](["res://sprites/tiles/components/jungle_grass.png", "res://sprites/tiles/forest.png"])

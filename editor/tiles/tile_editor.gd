@@ -1,6 +1,7 @@
 extends Control
 
 const StateEditor = preload("res://editor/tiles/state_editor.tscn")
+const LayerEditor = preload("res://editor/tiles/layer_editor.tscn")
 
 const NEW_TYPE_TEXT = "New Tile Type"
 
@@ -23,7 +24,8 @@ var type_name_regex = RegEx.new()
 
 @onready var states = $Margins/VContainer/HContainer/StatesContainer/Scroll/States
 
-# Called when the node enters the scene tree for the first time.
+# General ======================================================================
+
 func _ready():
 	set_tile_types()
 	type_name_regex.compile("^[a-z0-9_]+$")
@@ -71,7 +73,8 @@ func load_type_data(index: int):
 	for i in range(type.states.size()):
 		add_state(type.states[i])
 	
-	# TODO: load base layers
+	for path in type.base_layer_paths:
+		add_layer()
 	
 	# loading stuff
 	state.value = type.state
@@ -111,6 +114,8 @@ func save():
 	TileTypeTable.save()
 	set_tile_types()
 
+# States =======================================================================
+
 func create_state():
 	var new_state = type.add_state()
 	add_state(new_state)
@@ -136,6 +141,61 @@ func on_state_error(msg: String):
 
 func on_state_changed(value):
 	type.state = roundi(value)
+	
+# Layers =======================================================================
+
+func create_layers(paths: PackedStringArray):
+	for path in paths:
+		create_layer(path)
+
+func create_layer(path: String):
+	type.add_layer(path)
+	add_layer()
+
+func refresh_down_arrows():
+	var count = base_layers.get_child_count()
+	if count > 0:
+		base_layers.get_child(-1).disable_down(true)
+	if count > 1:
+		base_layers.get_child(-2).disable_down(false)
+
+func add_layer():
+	var layer_edit = LayerEditor.instantiate()
+	base_layers.add_child(layer_edit)
+	layer_edit.move.connect(move_layer)
+	layer_edit.remove.connect(remove_layer)
+	if not layer_edit.is_node_ready():
+		await layer_edit.ready
+	var index = base_layers.get_child_count() - 1
+	layer_edit.init(index, type)
+	
+	refresh_down_arrows()
+
+func move_layer(i1: int, layer_edit: PanelContainer, down: bool):
+	var i2: int
+	if down:
+		i2 = i1 + 1
+	else:
+		i2 = i1 - 1
+	if i2 >= base_layers.get_child_count() or i2 < 0:
+		return	# shouldn't happen
+	
+	type.swap_layers(i1, i2)
+	base_layers.move_child(layer_edit, i2)
+	base_layers.get_child(i1).set_id(i1)
+	base_layers.get_child(i2).set_id(i2)
+	refresh_down_arrows()
+
+func remove_layer(index: int, layer_edit: PanelContainer):
+	type.remove_layer(index)
+	base_layers.remove_child(layer_edit)
+	
+	for new_id in range(index, base_layers.get_child_count()):
+		base_layers.get_child(new_id).set_id(new_id)
+	
+	refresh_down_arrows()
+
+# Other ========================================================================
 
 func on_vis_changed(value):
 	type.visibility = roundi(value)

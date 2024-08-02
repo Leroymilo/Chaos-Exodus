@@ -30,3 +30,14 @@ func remove_state(index: int):
 	states.remove_at(index)
 	for i in range(index, states.size()):
 		states[i].id = i
+
+func add_layer(path: String):
+	base_layer_paths.append(path)
+
+func swap_layers(i1: int, i2: int):
+	var temp = base_layer_paths[i1]
+	base_layer_paths[i1] = base_layer_paths[i2]
+	base_layer_paths[i2] = temp
+
+func remove_layer(index: int):
+	base_layer_paths.remove_at(index)

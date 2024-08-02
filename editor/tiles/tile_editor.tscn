@@ -82,17 +82,23 @@ layout_mode = 2
 
 [node name="Scroll" type="ScrollContainer" parent="Margins/VContainer/HContainer/BaseProperties"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="BaseLayers" type="VBoxContainer" parent="Margins/VContainer/HContainer/BaseProperties/Scroll"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="AddLayerButton" type="Button" parent="Margins/VContainer/HContainer/BaseProperties"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_styles/normal = ExtResource("3_q5kkx")
 theme_override_styles/hover = ExtResource("4_v7p0v")
 theme_override_styles/pressed = ExtResource("5_1mtwh")
-text = "Add Base Layer Sprite"
+text = "Add Base Layer
+"
 
 [node name="VSeparator" type="VSeparator" parent="Margins/VContainer/HContainer"]
 layout_mode = 2
@@ -141,18 +147,16 @@ theme_override_styles/pressed = ExtResource("5_1mtwh")
 text = "Save All Tile Types Changes"
 
 [node name="NewTypeDialog" parent="." instance=ExtResource("5_2q37w")]
-visible = false
-layout_mode = 1
 title = "Enter Tile Type Name"
 
-[node name="SpriteSheetSelector" type="FileDialog" parent="."]
+[node name="SpriteSelector" type="FileDialog" parent="."]
 title = "Select a Sprite-sheet"
 initial_position = 2
-size = Vector2i(400, 260)
+size = Vector2i(400, 500)
 ok_button_text = "Open"
 dialog_hide_on_ok = true
 mode_overrides_title = false
-file_mode = 0
+file_mode = 1
 root_subfolder = "res://sprites/tiles/"
 filters = PackedStringArray("*.png ; PNG file")
 
@@ -167,9 +171,12 @@ cancel_button_text = "Don't delete"
 [connection signal="item_selected" from="Margins/VContainer/TypeSelectContainer/TypeSelector" to="." method="on_tile_type_selected"]
 [connection signal="value_changed" from="Margins/VContainer/HContainer/BaseProperties/StateCont/State" to="." method="on_state_changed"]
 [connection signal="value_changed" from="Margins/VContainer/HContainer/BaseProperties/VisCont/Visibility" to="." method="on_vis_changed"]
+[connection signal="pressed" from="Margins/VContainer/HContainer/BaseProperties/AddLayerButton" to="SpriteSelector" method="show"]
 [connection signal="pressed" from="Margins/VContainer/HContainer/StatesContainer/AddStateButton" to="." method="create_state"]
 [connection signal="pressed" from="Margins/VContainer/MetaButtons/RemoveButton" to="DeleteDialog" method="show"]
 [connection signal="pressed" from="Margins/VContainer/MetaButtons/SaveButton" to="." method="save"]
 [connection signal="cancel" from="NewTypeDialog" to="." method="on_new_type_dialog_cancel"]
 [connection signal="confirm" from="NewTypeDialog" to="." method="on_new_type_dialog_confirm"]
+[connection signal="file_selected" from="SpriteSelector" to="." method="create_layer"]
+[connection signal="files_selected" from="SpriteSelector" to="." method="create_layers"]
 [connection signal="confirmed" from="DeleteDialog" to="." method="on_remove"]
