@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="TileType" load_steps=9 format=3 uid="uid://0sa62l62oam7"]
+
+[ext_resource type="Script" uid="uid://rm514606oh81" path="res://resources/tile_layer.gd" id="1_yk25v"]
+[ext_resource type="Script" uid="uid://dt0hptudwfa3v" path="res://resources/tile_type.gd" id="2_h1wnd"]
+[ext_resource type="Texture2D" uid="uid://dchb7iagvccoh" path="res://assets/tiles/sprite-sheets/forest.png" id="3_kvkie"]
+[ext_resource type="Script" uid="uid://dwkxd033fnkmo" path="res://resources/action.gd" id="4_atd62"]
+
+[sub_resource type="Resource" id="Resource_h1wnd"]
+script = ExtResource("4_atd62")
+tools = Dictionary[int, int]({
+0: 1,
+1: -1
+})
+choices = Dictionary[String, PackedStringArray]({})
+is_move = true
+metadata/_custom_type_script = "uid://dwkxd033fnkmo"
+
+[sub_resource type="Resource" id="Resource_kvkie"]
+script = ExtResource("4_atd62")
+tools = Dictionary[int, int]({
+0: 1,
+1: 2
+})
+choices = Dictionary[String, PackedStringArray]({})
+is_move = false
+metadata/_custom_type_script = "uid://dwkxd033fnkmo"
+
+[sub_resource type="Resource" id="Resource_oa77p"]
+script = ExtResource("1_yk25v")
+row = 0
+z_index = 0
+conditions = Dictionary[Vector2i, String]({})
+metadata/_custom_type_script = "uid://rm514606oh81"
+
+[sub_resource type="Resource" id="Resource_yk25v"]
+script = ExtResource("1_yk25v")
+row = 1
+z_index = 16
+conditions = Dictionary[Vector2i, String]({})
+metadata/_custom_type_script = "uid://rm514606oh81"
+
+[resource]
+script = ExtResource("2_h1wnd")
+id = "forest"
+tag = "forest"
+sprite_sheet = ExtResource("3_kvkie")
+layers = Array[ExtResource("1_yk25v")]([SubResource("Resource_oa77p"), SubResource("Resource_yk25v")])
+actions = Array[ExtResource("4_atd62")]([SubResource("Resource_h1wnd"), SubResource("Resource_kvkie")])
+obstruct = 5
+visibility = 5
+metadata/_custom_type_script = "uid://dt0hptudwfa3v"
