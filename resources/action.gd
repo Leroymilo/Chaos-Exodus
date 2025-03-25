@@ -1,9 +1,21 @@
 extends Resource
 class_name Action
 
+static var empty_action: Action
+static var no_action: Action
+static var no_move: Action
+
 @export var tools: Dictionary[Globals.Tool, int] = {}
-@export var choices: Dictionary[String, PackedStringArray] = {}
+@export var condition: Condition = TrueCondition.new()
 @export var is_move: bool = true
+@export var description: String = ""
+
+static func _static_init() -> void:
+	empty_action = new()
+	no_action = new()
+	no_action.description = "No action on this tile."
+	no_move = new()
+	no_move.description = "No move to this tile."
 
 func is_valid(move: bool) -> bool:
 	# does not need enough tools to be valid, only unlock them.
@@ -13,14 +25,7 @@ func is_valid(move: bool) -> bool:
 	if not Globals.player.tools.has_all(tools.keys()):
 		return false
 	
-	for event_key in choices:
-		if event_key not in Globals.save_data.event_choices:
-			return false
-		for choice in choices[event_key]:
-			if choice not in Globals.save_data.event_choices[event_key]:
-				return false
-	
-	return true
+	return condition.value
 
 func use(move: bool) -> bool:
 	if not is_valid(move): return false
@@ -31,7 +36,7 @@ func use(move: bool) -> bool:
 		if count > 0: continue
 		if Globals.player.tools[tool] < -count:
 			has_enough = false
-			Globals.to_blink.append(tool)
+			Globals.blink_tool.emit(tool)
 	if not has_enough: return false
 	
 	for tool in tools.keys():

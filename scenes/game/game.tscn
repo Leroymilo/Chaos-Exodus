@@ -1,0 +1,181 @@
+[gd_scene load_steps=9 format=3 uid="uid://cys0bg6rmf3xl"]
+
+[ext_resource type="PackedScene" uid="uid://chl3ioonxrxu3" path="res://scenes/game/map.tscn" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://bbthmgy8mpdso" path="res://scenes/game/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://0dgbbj1i1jy3" path="res://scenes/game/journal.tscn" id="3_lnu2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbhrr"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+
+[sub_resource type="Animation" id="Animation_lbhrr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/CenterContainer:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/CenterContainer/JournalContainer/SubViewport/Journal:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_lnu2h"]
+resource_name = "journal_in"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/CenterContainer:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 2000), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/CenterContainer/JournalContainer/SubViewport/Journal:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_iywne"]
+resource_name = "journal_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/CenterContainer:custom_minimum_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2000)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/CenterContainer/JournalContainer/SubViewport/Journal:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iywne"]
+_data = {
+&"RESET": SubResource("Animation_lbhrr"),
+&"journal_in": SubResource("Animation_lnu2h"),
+&"journal_out": SubResource("Animation_iywne")
+}
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yqjtg")
+
+[node name="MapContainer" type="SubViewportContainer" parent="."]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 320.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="MapViewport" type="SubViewport" parent="MapContainer"]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(1280, 320)
+size_2d_override = Vector2i(1280, 320)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Map" parent="MapContainer/MapViewport" instance=ExtResource("1_uwrxv")]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+alignment = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="JournalContainer" type="SubViewportContainer" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/CenterContainer/JournalContainer"]
+disable_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(480, 320)
+size_2d_override = Vector2i(480, 320)
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="Journal" parent="VBoxContainer/CenterContainer/JournalContainer/SubViewport" instance=ExtResource("3_lnu2h")]
+unique_name_in_owner = true
+visible = false
+
+[node name="ToolBar" type="PanelContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_lbhrr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ToolBar"]
+layout_mode = 2
+
+[node name="Tools" type="HFlowContainer" parent="VBoxContainer/ToolBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ActionDesc" type="Label" parent="VBoxContainer/ToolBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "This is where the action desctiption goes."
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_iywne")
+}
+
+[connection signal="opening" from="VBoxContainer/CenterContainer/JournalContainer/SubViewport/Journal" to="." method="open_journal"]

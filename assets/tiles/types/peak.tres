@@ -9,21 +9,21 @@
 script = ExtResource("2_a7gm0")
 row = 0
 z_index = 0
-conditions = Dictionary[Vector2i, String]({})
+border_conditions = Dictionary[Vector2i, String]({})
 metadata/_custom_type_script = "uid://rm514606oh81"
 
 [sub_resource type="Resource" id="Resource_a7gm0"]
 script = ExtResource("2_a7gm0")
 row = 1
 z_index = 16
-conditions = Dictionary[Vector2i, String]({})
+border_conditions = Dictionary[Vector2i, String]({})
 metadata/_custom_type_script = "uid://rm514606oh81"
 
 [sub_resource type="Resource" id="Resource_6yvrx"]
 script = ExtResource("2_a7gm0")
 row = 2
 z_index = 128
-conditions = Dictionary[Vector2i, String]({})
+border_conditions = Dictionary[Vector2i, String]({})
 metadata/_custom_type_script = "uid://rm514606oh81"
 
 [resource]

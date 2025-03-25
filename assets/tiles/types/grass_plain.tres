@@ -11,18 +11,8 @@ tools = Dictionary[int, int]({
 0: 1,
 1: -1
 })
-choices = Dictionary[String, PackedStringArray]({})
 is_move = true
-metadata/_custom_type_script = "uid://dwkxd033fnkmo"
-
-[sub_resource type="Resource" id="Resource_uqkqg"]
-script = ExtResource("1_uqkqg")
-tools = Dictionary[int, int]({
-0: 1,
-3: 2
-})
-choices = Dictionary[String, PackedStringArray]({})
-is_move = false
+description = "Go to grass plains."
 metadata/_custom_type_script = "uid://dwkxd033fnkmo"
 
 [sub_resource type="Resource" id="Resource_am17p"]
@@ -31,15 +21,25 @@ tools = Dictionary[int, int]({
 0: 1,
 1: 2
 })
-choices = Dictionary[String, PackedStringArray]({})
 is_move = false
+description = "Rest."
+metadata/_custom_type_script = "uid://dwkxd033fnkmo"
+
+[sub_resource type="Resource" id="Resource_uqkqg"]
+script = ExtResource("1_uqkqg")
+tools = Dictionary[int, int]({
+0: 1,
+3: 2
+})
+is_move = false
+description = "Craft Torches."
 metadata/_custom_type_script = "uid://dwkxd033fnkmo"
 
 [sub_resource type="Resource" id="Resource_mqrni"]
 script = ExtResource("1_xj6ju")
 row = 0
 z_index = 0
-conditions = Dictionary[Vector2i, String]({})
+border_conditions = Dictionary[Vector2i, String]({})
 metadata/_custom_type_script = "uid://rm514606oh81"
 
 [resource]
@@ -48,7 +48,7 @@ id = "grass_plain"
 tag = "plain"
 sprite_sheet = ExtResource("3_am17p")
 layers = Array[ExtResource("1_xj6ju")]([SubResource("Resource_mqrni")])
-actions = Array[ExtResource("1_uqkqg")]([SubResource("Resource_xj6ju"), SubResource("Resource_uqkqg"), SubResource("Resource_am17p")])
+actions = Array[ExtResource("1_uqkqg")]([SubResource("Resource_xj6ju"), SubResource("Resource_am17p"), SubResource("Resource_uqkqg")])
 obstruct = 5
 visibility = 5
 metadata/_custom_type_script = "uid://dt0hptudwfa3v"

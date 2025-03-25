@@ -1,7 +1,0 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://wq4m64hx7mxd"]
-
-[ext_resource type="FontFile" uid="uid://dvbcaiphnl4lb" path="res://assets/fonts/fusion-pixel-12px-monospaced-kr-latin-400-normal.ttf" id="1_t6w2i"]
-
-[resource]
-font = ExtResource("1_t6w2i")
-font_size = 12

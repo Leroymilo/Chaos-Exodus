@@ -1,0 +1,43 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://b0g7ak0qqm4el"]
+
+[ext_resource type="FontFile" uid="uid://dvbcaiphnl4lb" path="res://assets/fonts/fusion-pixel-12px-monospaced-kr-latin-400-normal.ttf" id="1_3wqoj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rrfgt"]
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0, 0, 0, 0)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbh1m"]
+bg_color = Color(0.666569, 0.666569, 0.666569, 1)
+border_width_left = 1
+border_width_right = 1
+border_color = Color(0, 0, 0, 0)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apwdn"]
+bg_color = Color(0.800491, 0.800491, 0.800491, 1)
+border_color = Color(0, 0, 0, 0)
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1atf4"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(1, 1, 1, 0)
+anti_aliasing = false
+
+[resource]
+default_font = ExtResource("1_3wqoj")
+default_font_size = 12
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_rrfgt")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_tbh1m")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_apwdn")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_1atf4")

@@ -11,8 +11,8 @@ tools = Dictionary[int, int]({
 0: 1,
 1: -1
 })
-choices = Dictionary[String, PackedStringArray]({})
 is_move = true
+description = "Go into forest."
 metadata/_custom_type_script = "uid://dwkxd033fnkmo"
 
 [sub_resource type="Resource" id="Resource_kvkie"]
@@ -21,22 +21,22 @@ tools = Dictionary[int, int]({
 0: 1,
 1: 2
 })
-choices = Dictionary[String, PackedStringArray]({})
 is_move = false
+description = "Rest."
 metadata/_custom_type_script = "uid://dwkxd033fnkmo"
 
 [sub_resource type="Resource" id="Resource_oa77p"]
 script = ExtResource("1_yk25v")
 row = 0
 z_index = 0
-conditions = Dictionary[Vector2i, String]({})
+border_conditions = Dictionary[Vector2i, String]({})
 metadata/_custom_type_script = "uid://rm514606oh81"
 
 [sub_resource type="Resource" id="Resource_yk25v"]
 script = ExtResource("1_yk25v")
 row = 1
 z_index = 16
-conditions = Dictionary[Vector2i, String]({})
+border_conditions = Dictionary[Vector2i, String]({})
 metadata/_custom_type_script = "uid://rm514606oh81"
 
 [resource]
