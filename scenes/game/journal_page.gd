@@ -56,7 +56,7 @@ func write_page() -> void:
 	current_mode = INPUT_MODE.Write
 	var script_path: String = data.script_queue.front()
 	chars = 0
-	writing_start_time = Time.get_ticks_msec()
+	writing_start_time = -1
 	script_tree = ScriptTree.new()
 	var file = FileAccess.open(script_path, FileAccess.READ)
 	script_tree.parse(file.get_as_text(true), 0)
@@ -93,6 +93,8 @@ func script_ended() -> void:
 
 func _process(_delta: float) -> void:
 	if current_mode == INPUT_MODE.Write and ready_to_write:
+		if writing_start_time == -1:
+			writing_start_time = Time.get_ticks_msec()
 		chars = (Time.get_ticks_msec() - writing_start_time)\
 			* Globals.writing_speed / 1000
 		update_text()
@@ -108,6 +110,8 @@ func _input(event: InputEvent) -> void:
 	elif current_mode == INPUT_MODE.Choose:
 		if branch_node.handle_event(event):
 			update_text()
+	
+	entry_text.get_content_height()
 
 func update_text() -> void:
 	entry_text.text = data.finished_text + script_tree.get_text(chars).text

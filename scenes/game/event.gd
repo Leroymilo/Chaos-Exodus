@@ -7,14 +7,14 @@ class_name Event
 		data.condition.value_changed.connect(on_condition_changed)
 		on_condition_changed()
 		triggered = Globals.save_data.events_data.has(data.id)
-		print("event ", data.id, " already triggered? ", triggered)
+		if data.hidden: hide()
 
 var triggerable: bool
 var triggered: bool = false
 
 func on_condition_changed():
 	if triggered: return
-	if data.condition.value:
+	if data.condition.value and not data.hidden:
 		show()
 	else:
 		hide()

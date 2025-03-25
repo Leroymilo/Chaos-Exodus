@@ -1,4 +1,4 @@
 This is some testing text. This event should be reached first when testing branches and conditions.
-This is a new line for testing formatting.{if_event:soup| I see you found the soup event, good job!}
-This line has a branch with 3 choices.{branch|choice_1:Adds a script to the queue|choice_2:Adds no script|choice_3:No script either but used in condition in another event}More text on the same line to test newlines.
+This is a new line for testing formatting.{if_event:soup| I see you found the soup event, good job!|}
+This line has a branch with 3 choices.{branch|choice_1:Adds a script to the queue|choice_2:Adds no script|choice_3:Enables condition}More text on the same line to test newlines.
 This is a bunch of text after the choice to check if the math I did was correct.

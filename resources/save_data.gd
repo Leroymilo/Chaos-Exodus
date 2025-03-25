@@ -32,7 +32,7 @@ func load_from_scenario(p_scenario: Scenario) -> void:
 	events_order.append(scenario.start_event.id)
 	
 	# saving to file
-	ResourceSaver.save(Globals.save_data, "res://saves/test_save.tres")
+	ResourceSaver.save(Globals.save_data, "res://saves/demo_save.tres")
 
 func add_event(event_data: EventData) -> void:
 	var event_save_data := EventSaveData.new()
@@ -58,5 +58,5 @@ func save() -> void:
 	print("save")
 	Globals.save_data.position = Globals.player.tile_pos
 	Globals.save_data.tools = Globals.player.tools
-	ResourceSaver.save(Globals.save_data, "res://saves/test_save.tres")
+	ResourceSaver.save(Globals.save_data, "res://saves/demo_save.tres")
 	pass

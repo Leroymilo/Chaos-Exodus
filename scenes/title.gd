@@ -6,8 +6,8 @@ var scenario: Scenario 	= preload("res://scenarios/Demo/data.tres")
 @onready var continue_butt := %Continue
 
 func _ready() -> void:
-	if FileAccess.file_exists("res://saves/test_save.tres"):
-		Globals.save_data = load("res://saves/test_save.tres")
+	if FileAccess.file_exists("res://saves/demo_save.tres"):
+		Globals.save_data = load("res://saves/demo_save.tres")
 		continue_butt.disabled = false
 
 func _on_start_pressed() -> void:
