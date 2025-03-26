@@ -32,7 +32,8 @@ func load_from_scenario(p_scenario: Scenario) -> void:
 	events_order.append(scenario.start_event.id)
 	
 	# saving to file
-	ResourceSaver.save(Globals.save_data, "res://saves/demo_save.tres")
+	DirAccess.make_dir_recursive_absolute("res://saves/")
+	ResourceSaver.save(Globals.save_data, "res://saves/demo_save.tres", )
 
 func add_event(event_data: EventData) -> void:
 	var event_save_data := EventSaveData.new()
