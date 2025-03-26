@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkraojdcl1b4o"
-path="res://.godot/imported/time_.png-635b71abcb6466438d6604520da425f8.ctex"
+uid="uid://djo4qkex6hh6r"
+path="res://.godot/imported/soup.png-80aa6c43f0aed68ec08e6ef99cd8971e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tools/time_.png"
-dest_files=["res://.godot/imported/time_.png-635b71abcb6466438d6604520da425f8.ctex"]
+source_file="res://assets/icons/tools/soup.png"
+dest_files=["res://.godot/imported/soup.png-80aa6c43f0aed68ec08e6ef99cd8971e.ctex"]
 
 [params]
 

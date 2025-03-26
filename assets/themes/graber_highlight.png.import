@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://kvgvldpkv63o"
-path="res://.godot/imported/morale.png-bdea326dafb1fe64c107c41d764f13e3.ctex"
+uid="uid://cmm15ktifs08b"
+path="res://.godot/imported/graber_highlight.png-42860ed49d18cee36ca2134ca1a602d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tools/morale.png"
-dest_files=["res://.godot/imported/morale.png-bdea326dafb1fe64c107c41d764f13e3.ctex"]
+source_file="res://assets/themes/graber_highlight.png"
+dest_files=["res://.godot/imported/graber_highlight.png-42860ed49d18cee36ca2134ca1a602d4.ctex"]
 
 [params]
 

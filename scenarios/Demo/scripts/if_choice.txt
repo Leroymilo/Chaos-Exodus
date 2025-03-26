@@ -1,0 +1,2 @@
+This event will only appear if the 2nd choice was taken in the test event.
+{if_event:soup|also {bbcode:font_size=36|SOUP}|}

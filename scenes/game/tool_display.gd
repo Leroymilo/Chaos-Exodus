@@ -6,6 +6,8 @@ extends GridContainer
 @onready var update_timer: Timer = $UpdateTimer
 @onready var blink_timer: Timer = $BlinkTimer
 
+const ICON_SIZE := Vector2i(16, 16)
+
 var digit_count: int = 3
 
 const BLINK := 8
@@ -17,7 +19,7 @@ var tool: Globals.Tool:
 		
 		tool = value
 		var tool_name: String = Globals.Tool.find_key(tool).to_lower()
-		var texture_path := "res://assets/tools/{0}.png".format([tool_name])
+		var texture_path := "res://assets/icons/tools/{0}.png".format([tool_name])
 		icon.texture = load(texture_path)
 		
 		if tool == Globals.Tool.Time_:
@@ -29,11 +31,15 @@ var tool: Globals.Tool:
 		else: set_count_text(0)
 
 func _ready() -> void:
-	theme.default_font_size = Globals.TEXT_MIN_SCALE * Globals.tool_bar_scale
-	icon.custom_minimum_size = icon.texture.get_size() * Globals.tool_bar_scale
 	Globals.blink_tool.connect(start_blink)
 	Globals.update_tools.connect(update_count)
 	Globals.show_action.connect(show_diff)
+	Globals.tool_bar_scale_changed.connect(update_scale)
+	update_scale()
+
+func update_scale() -> void:
+	theme.default_font_size = Globals.TEXT_MIN_SCALE * Globals.tool_bar_scale
+	icon.custom_minimum_size = ICON_SIZE * Globals.tool_bar_scale
 
 func show_diff(action: Action) -> void:
 	var value: int
@@ -49,7 +55,15 @@ func show_diff(action: Action) -> void:
 	set_change_text(value)
 
 func update_count() -> void:
-	if not Globals.player.tools.has(tool): return
+	if not Globals.player.tools.has(tool):
+		hide()
+		return
+	
+	if not visible:
+		set_count_text(Globals.player.tools[tool])
+		count.modulate = Color.WHITE
+		show()
+		return
 	
 	var count_val = count.text as int
 	var true_count = Globals.player.tools[tool]

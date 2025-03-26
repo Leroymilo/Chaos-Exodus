@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cy20g4fvioddd" path="res://resources/scenario.gd" id="1_rehdf"]
 [ext_resource type="Script" uid="uid://c3cdtepwp1hv1" path="res://resources/conditions/true_condition.gd" id="2_qmxxv"]
 [ext_resource type="Script" uid="uid://cssns48v1q52k" path="res://resources/event_data.gd" id="3_o6w71"]
-[ext_resource type="Resource" uid="uid://nyc375015liw" path="res://scenarios/Demo/map/start.tres" id="4_knocw"]
+[ext_resource type="Resource" uid="uid://nyc375015liw" path="res://scenarios/Demo/regions/start.tres" id="4_knocw"]
 
 [sub_resource type="Resource" id="Resource_c4m7h"]
 script = ExtResource("2_qmxxv")
@@ -24,4 +24,8 @@ name = "Demo"
 start_region = ExtResource("4_knocw")
 start_pos = Vector2i(2, 2)
 start_event = SubResource("Resource_y07ak")
+start_tools = Dictionary[int, int]({
+0: 0,
+1: 5
+})
 metadata/_custom_type_script = "uid://cy20g4fvioddd"

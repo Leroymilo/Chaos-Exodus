@@ -24,6 +24,7 @@ var branch_node: ScriptBranch
 func _ready() -> void:
 	if not is_left_page:
 		page_nb.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	Globals.writing_speed_changed.connect(writing_speed_changed)
 
 func load_page(p_index: int) -> void:
 	index = p_index
@@ -57,6 +58,7 @@ func write_page() -> void:
 	var script_path: String = data.script_queue.front()
 	chars = 0
 	writing_start_time = -1
+	ScriptBase.branch_nodes.clear()
 	script_tree = ScriptTree.new()
 	var file = FileAccess.open(script_path, FileAccess.READ)
 	script_tree.parse(file.get_as_text(true), 0)
@@ -68,12 +70,16 @@ func write_page() -> void:
 		branch.choice_made.connect(choice_made)
 		branch.set_selection(branches_taken)
 
+func writing_speed_changed() -> void:
+	writing_start_time = Time.get_ticks_msec() - chars * 1000 / Globals.writing_speed
+
 func choice_started(value: ScriptBranch) -> void:
 	current_mode = INPUT_MODE.Choose
 	branch_node = value
 	value.choice_started.disconnect(choice_started)
 
 func choice_made(branch_id: String) -> void:
+	Globals.choice_taken.emit(data.event_data.id, branch_id)
 	var new_path := data.take_branch(branch_id)
 	if new_path != "":
 		data.script_queue.append(new_path)
@@ -97,6 +103,9 @@ func _process(_delta: float) -> void:
 			writing_start_time = Time.get_ticks_msec()
 		chars = (Time.get_ticks_msec() - writing_start_time)\
 			* Globals.writing_speed / 1000
+		update_text()
+	
+	if current_mode == INPUT_MODE.Choose and ready_to_write:
 		update_text()
 
 func _input(event: InputEvent) -> void:

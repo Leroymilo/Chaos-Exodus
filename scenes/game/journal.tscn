@@ -470,7 +470,6 @@ texture_filter = 1
 script = ExtResource("1_5bwne")
 
 [node name="BackGround" type="Sprite2D" parent="."]
-position = Vector2(0, 256)
 texture = ExtResource("2_0ldv6")
 centered = false
 hframes = 7

@@ -75,7 +75,7 @@ func get_text(length: int) -> RichText:
 			var display := branch_displays[branch_id].get_text(-1).text
 			if i == current:
 				var space := " "
-				if (Time.get_ticks_msec() / 1000) % 2: space = ""
+				if (Time.get_ticks_msec() / 500) % 2: space = ""
 				# animates carrets moving in and out
 				display = "> " + space + display + space + " <"
 			result.text += display + '\n'

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cys0bg6rmf3xl"]
+[gd_scene load_steps=10 format=3 uid="uid://cys0bg6rmf3xl"]
 
 [ext_resource type="PackedScene" uid="uid://chl3ioonxrxu3" path="res://scenes/game/map.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://bbthmgy8mpdso" path="res://scenes/game/game.gd" id="1_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://0dgbbj1i1jy3" path="res://scenes/game/journal.tscn" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://c57orfsgl2g74" path="res://scenes/game/pause_menu.tscn" id="4_kelw5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lbhrr"]
 content_margin_left = 4.0
@@ -177,5 +178,9 @@ text = "This is where the action desctiption goes."
 libraries = {
 &"": SubResource("AnimationLibrary_iywne")
 }
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_kelw5")]
+visible = false
+layout_mode = 1
 
 [connection signal="opening" from="VBoxContainer/CenterContainer/JournalContainer/SubViewport/Journal" to="." method="open_journal"]

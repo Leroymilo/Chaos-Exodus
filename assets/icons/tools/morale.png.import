@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcxx2gro7y727"
-path="res://.godot/imported/machete.png-b45e98da8d23ebb8f036cf9d74005121.ctex"
+uid="uid://kvgvldpkv63o"
+path="res://.godot/imported/morale.png-1c0b61f5313b79dbcc855433bb9b009a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tools/machete.png"
-dest_files=["res://.godot/imported/machete.png-b45e98da8d23ebb8f036cf9d74005121.ctex"]
+source_file="res://assets/icons/tools/morale.png"
+dest_files=["res://.godot/imported/morale.png-1c0b61f5313b79dbcc855433bb9b009a.ctex"]
 
 [params]
 

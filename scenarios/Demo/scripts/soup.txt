@@ -6,3 +6,4 @@
 
 
 {bbcode:wave amp=100.0|{bbcode:rainbow|{bbcode:center|{bbcode:font_size=48|S O U P}}}}
+{tool:enable:Soup:999}

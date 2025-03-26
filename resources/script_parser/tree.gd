@@ -30,8 +30,12 @@ func add_tag(raw_text: String, i: int) -> int:
 		child = ScriptBranch.new()
 	elif end.begins_with("{if_event:"):
 		child = ScriptIfEvent.new()
+	elif end.begins_with("{if_choice:"):
+		child = ScriptIfChoice.new()
 	elif end.begins_with("{bbcode:"):
 		child = ScriptBBCode.new()
+	elif end.begins_with("{tool:"):
+		child = ScriptTool.new()
 	else:
 		child = ScriptInvalid.new()
 	

@@ -1,19 +1,25 @@
 extends Condition
 class_name LogicCondition
 
-enum GateType {AND, OR, XOR}
+enum GateType {UNDEF, AND, OR, XOR}
 
-@export var inputs: Array[Condition]
-@export var gate_type: GateType
+@export var inputs: Array[Condition]:
+	set(new_val):
+		if new_val == null: return
+		inputs = new_val
+		value = compute_value()
+		for input in inputs:
+			input.value_changed.connect(update_value)
 
-func _init(p_inputs: Array[Condition], p_type: GateType) -> void:
-	inputs = p_inputs
-	gate_type = p_type
-	value = compute_value()
-	for input in inputs:
-		input.value_changed.connect(update_value)
+@export var gate_type: GateType = GateType.UNDEF:
+	set(new_val):
+		gate_type = new_val
+		value = compute_value()
 
 func compute_value() -> bool:
+	if gate_type == GateType.UNDEF: return false
+	if inputs == null: return false
+	
 	var count_true = 0
 	for input in inputs:
 		if input.value:

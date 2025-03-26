@@ -1,0 +1,2 @@
+This event will only appear once the test event will have started.
+{if_choice:test_event:choice_3|This text will only appear if the 3rd choice was taken in the test event|}

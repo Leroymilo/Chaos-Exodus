@@ -11,14 +11,25 @@ const TEXT_MIN_SCALE := 12
 
 enum Tool {
 	Time_, Energy, Morale,
-	Torch, Machete, Rope
+	Torch, Machete, Rope, Soup
 }
 
 # Settings
-
-var map_scale := 2
-var journal_scale := 2
-var tool_bar_scale := 2
+signal map_scale_changed()
+var map_scale := 2:
+	set(value):
+		map_scale = value
+		map_scale_changed.emit()
+signal journal_scale_changed()
+var journal_scale := 2:
+	set(value):
+		journal_scale = value
+		journal_scale_changed.emit()
+signal tool_bar_scale_changed()
+var tool_bar_scale := 2:
+	set(value):
+		tool_bar_scale = value
+		tool_bar_scale_changed.emit()
 
 signal show_grid_changed(show: bool)
 var show_grid := true:
@@ -28,7 +39,11 @@ var show_grid := true:
 
 var sort_by_last_used := true
 
-var writing_speed := 40
+signal writing_speed_changed()
+var writing_speed := 40:
+	set(value):
+		writing_speed = value
+		writing_speed_changed.emit()
 
 # Global Variables
 

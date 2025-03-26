@@ -1,0 +1,108 @@
+[gd_resource type="Resource" script_class="Region" load_steps=24 format=3 uid="uid://nyc375015liw"]
+
+[ext_resource type="Script" uid="uid://cssns48v1q52k" path="res://resources/event_data.gd" id="1_2ytoo"]
+[ext_resource type="Script" uid="uid://c3cdtepwp1hv1" path="res://resources/conditions/true_condition.gd" id="2_0r2vq"]
+[ext_resource type="Script" uid="uid://dwcsb3gjbb4ub" path="res://resources/conditions/choice_condition.gd" id="3_st5er"]
+[ext_resource type="Script" uid="uid://ddlwrhvx1git6" path="res://resources/conditions/event_condition.gd" id="4_o6p1k"]
+[ext_resource type="Script" uid="uid://b6w03ajj73tdd" path="res://resources/region.gd" id="5_n4eny"]
+[ext_resource type="Script" uid="uid://cmdndcdcqd4hv" path="res://resources/conditions/condition.gd" id="5_st5er"]
+[ext_resource type="Script" uid="uid://ckimg51o6rcu" path="res://resources/conditions/logic_condition.gd" id="6_o6p1k"]
+[ext_resource type="Script" uid="uid://dt0hptudwfa3v" path="res://resources/tile_type.gd" id="6_y6xkf"]
+[ext_resource type="Resource" uid="uid://dxfkireop7bf4" path="res://assets/tiles/types/grass_plain.tres" id="7_siowo"]
+[ext_resource type="Resource" uid="uid://0sa62l62oam7" path="res://assets/tiles/types/forest.tres" id="8_5e5h8"]
+[ext_resource type="Resource" uid="uid://bx4e03ob2ckom" path="res://assets/tiles/types/peak.tres" id="9_yr1vl"]
+
+[sub_resource type="Resource" id="Resource_e7p2w"]
+script = ExtResource("2_0r2vq")
+metadata/_custom_type_script = "uid://c3cdtepwp1hv1"
+
+[sub_resource type="Resource" id="Resource_oty0e"]
+script = ExtResource("1_2ytoo")
+id = "soup"
+hidden = true
+condition = SubResource("Resource_e7p2w")
+script_path = "res://scenarios/Demo/scripts/soup.txt"
+branch_paths = Dictionary[String, String]({})
+metadata/_custom_type_script = "uid://cssns48v1q52k"
+
+[sub_resource type="Resource" id="Resource_6ix05"]
+script = ExtResource("2_0r2vq")
+
+[sub_resource type="Resource" id="Resource_pe4jf"]
+script = ExtResource("1_2ytoo")
+id = "test_event"
+hidden = false
+condition = SubResource("Resource_6ix05")
+script_path = "res://scenarios/Demo/scripts/test.txt"
+branch_paths = Dictionary[String, String]({
+"choice_1": "res://scenarios/Demo/scripts/text_1.txt"
+})
+metadata/_custom_type_script = "uid://cssns48v1q52k"
+
+[sub_resource type="Resource" id="Resource_ko4ox"]
+script = ExtResource("3_st5er")
+event_id = "test_event"
+choice_id = "choice_2"
+metadata/_custom_type_script = "uid://dwcsb3gjbb4ub"
+
+[sub_resource type="Resource" id="Resource_btvur"]
+script = ExtResource("1_2ytoo")
+id = "if_choice"
+hidden = false
+condition = SubResource("Resource_ko4ox")
+script_path = "res://scenarios/Demo/scripts/if_choice.txt"
+branch_paths = Dictionary[String, String]({})
+metadata/_custom_type_script = "uid://cssns48v1q52k"
+
+[sub_resource type="Resource" id="Resource_lljgy"]
+script = ExtResource("4_o6p1k")
+event_id = "test_event"
+metadata/_custom_type_script = "uid://ddlwrhvx1git6"
+
+[sub_resource type="Resource" id="Resource_vc5sh"]
+script = ExtResource("1_2ytoo")
+id = "if_event"
+hidden = false
+condition = SubResource("Resource_lljgy")
+script_path = "res://scenarios/Demo/scripts/if_event.txt"
+branch_paths = Dictionary[String, String]({})
+metadata/_custom_type_script = "uid://cssns48v1q52k"
+
+[sub_resource type="Resource" id="Resource_n4eny"]
+script = ExtResource("4_o6p1k")
+event_id = "if_event"
+metadata/_custom_type_script = "uid://ddlwrhvx1git6"
+
+[sub_resource type="Resource" id="Resource_y6xkf"]
+script = ExtResource("4_o6p1k")
+event_id = "if_choice"
+metadata/_custom_type_script = "uid://ddlwrhvx1git6"
+
+[sub_resource type="Resource" id="Resource_siowo"]
+script = ExtResource("6_o6p1k")
+inputs = Array[ExtResource("5_st5er")]([SubResource("Resource_n4eny"), SubResource("Resource_y6xkf")])
+gate_type = 1
+metadata/_custom_type_script = "uid://ckimg51o6rcu"
+
+[sub_resource type="Resource" id="Resource_5e5h8"]
+script = ExtResource("1_2ytoo")
+id = "lorem_ipsum"
+hidden = false
+condition = SubResource("Resource_siowo")
+script_path = "res://scenarios/Demo/scripts/lorem_ipsum.txt"
+branch_paths = Dictionary[String, String]({})
+metadata/_custom_type_script = "uid://cssns48v1q52k"
+
+[resource]
+script = ExtResource("5_n4eny")
+id = "start"
+tiles = Array[ExtResource("6_y6xkf")]([ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("9_yr1vl"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("9_yr1vl"), ExtResource("9_yr1vl"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("9_yr1vl"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("8_5e5h8"), ExtResource("7_siowo"), ExtResource("7_siowo")])
+events = Dictionary[Vector2i, ExtResource("1_2ytoo")]({
+Vector2i(0, 0): SubResource("Resource_oty0e"),
+Vector2i(5, 2): SubResource("Resource_pe4jf"),
+Vector2i(7, 1): SubResource("Resource_btvur"),
+Vector2i(7, 3): SubResource("Resource_vc5sh"),
+Vector2i(9, 2): SubResource("Resource_5e5h8")
+})
+chaos_delay = 0
+metadata/_custom_type_script = "uid://b6w03ajj73tdd"

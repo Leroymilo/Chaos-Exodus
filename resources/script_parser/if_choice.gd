@@ -13,7 +13,7 @@ func parse(raw_text: String, i: int) -> int:
 	var j = raw_text.find(':', i)
 	var event_id := raw_text.substr(i, j-i)
 	i = j+1
-	j = raw_text.find(':', i)
+	j = raw_text.find('|', i)
 	var branch_id := raw_text.substr(i, j-i)
 	i = j+1
 	
