@@ -32,6 +32,13 @@ var target := Vector2i.ZERO:
 		
 		target_moved.emit()
 
+func _ready() -> void:
+	tile_pos = Globals.save_data.position
+	tools = Globals.save_data.tools
+	
+	cursor.modulate = color
+	arrows.modulate = color
+
 func move_target(direction: Vector2i) -> void:
 	if target + direction == Vector2i.ZERO:
 		target = Vector2i.ZERO
@@ -58,10 +65,22 @@ func try_act(tile: Tile) -> bool:
 		tile_pos += target
 		target = Vector2i.ZERO
 		moved.emit()
-	Globals.update_tools.emit()
 	return true
 
-func set_action_indicator(total: int, index: int = 0):
+func add_tool(tool: Globals.Tool, count: int) -> void:
+	if not tools.has(tool): tools[tool] = 0
+	tools[tool] = max(0, tools[tool] + count)
+	Globals.update_tools.emit()
+
+func set_tool(tool: Globals.Tool, count: int) -> void:
+	tools[tool] = count
+	Globals.update_tools.emit()
+
+func remove_tool(tool) -> void:
+	tools.erase(tool)
+	Globals.update_tools.emit()
+
+func set_action_indicator(total: int, index: int = 0) -> void:
 	if total == 0:
 		no_action.show()
 		act_indic.hide()
@@ -69,7 +88,3 @@ func set_action_indicator(total: int, index: int = 0):
 		act_indic.text = "{0}/{1}".format([index+1, total])
 		no_action.hide()
 		act_indic.show()
-
-func _ready() -> void:
-	cursor.modulate = color
-	arrows.modulate = color

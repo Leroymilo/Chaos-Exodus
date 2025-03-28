@@ -45,16 +45,12 @@ func get_text(length: int) -> RichText:
 		triggered = true
 		match mode:
 			Mode.enable:
-				Globals.player.tools[tool] = count
-				Globals.update_tools.emit()
+				Globals.player.set_tool(tool, count)
 			Mode.disable:
-				Globals.player.tools.erase(tool)
-				Globals.update_tools.emit()
+				Globals.player.remove_tool(tool)
 			Mode.add:
-				Globals.player.tools[tool] += count
-				Globals.update_tools.emit()
+				Globals.player.add_tool(tool, count)
 			Mode.set_:
-				Globals.player.tools[tool] = count
-				Globals.update_tools.emit()
+				Globals.player.set_tool(tool, count)
 	
 	return result

@@ -13,8 +13,11 @@ var in_event: bool:
 	get():
 		return current_mode == INPUT_MODE.Write or current_mode == INPUT_MODE.Choose
 
+var until_new_scroll := 0.0
+var scrolling := 0	# 1 is down, -1 is up
+
 var data: EventSaveData
-var index: int = -1
+var index := -1
 
 var writing_start_time := 0
 var chars := 0
@@ -97,7 +100,7 @@ func script_ended() -> void:
 		Globals.save_data.save()
 		write_page()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if current_mode == INPUT_MODE.Write and ready_to_write:
 		if writing_start_time == -1:
 			writing_start_time = Time.get_ticks_msec()
@@ -107,6 +110,12 @@ func _process(_delta: float) -> void:
 	
 	if current_mode == INPUT_MODE.Choose and ready_to_write:
 		update_text()
+	
+	if scrolling != 0:
+		until_new_scroll -= delta
+		if until_new_scroll <= 0:
+			until_new_scroll = Globals.scroll_delay
+			entry_text.get_v_scroll_bar().value += scrolling * 12
 
 func _input(event: InputEvent) -> void:
 	if Globals.has_control != Globals.Controller.Journal: return
@@ -120,7 +129,17 @@ func _input(event: InputEvent) -> void:
 		if branch_node.handle_event(event):
 			update_text()
 	
-	entry_text.get_content_height()
+	if event.is_action_pressed("ui_down") and scrolling != 1:
+		scrolling = 1
+		entry_text.get_v_scroll_bar().value += 12
+		until_new_scroll = 10 * Globals.scroll_delay
+	elif event.is_action_pressed("ui_up") and scrolling != -1:
+		scrolling = -1
+		entry_text.get_v_scroll_bar().value -= 12
+		until_new_scroll = 10 * Globals.scroll_delay
+	elif event.is_action_released("ui_up")\
+	or event.is_action_released("ui_down"):
+		scrolling = 0
 
 func update_text() -> void:
 	entry_text.text = data.finished_text + script_tree.get_text(chars).text

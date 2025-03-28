@@ -41,5 +41,5 @@ func use(move: bool) -> bool:
 	
 	for tool in tools.keys():
 		var count = tools[tool]
-		Globals.player.tools[tool] += count
+		Globals.player.add_tool(tool, count)
 	return true

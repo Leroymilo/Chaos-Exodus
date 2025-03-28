@@ -34,12 +34,12 @@ func _ready() -> void:
 	Globals.blink_tool.connect(start_blink)
 	Globals.update_tools.connect(update_count)
 	Globals.show_action.connect(show_diff)
-	Globals.tool_bar_scale_changed.connect(update_scale)
+	Globals.toolbar_scale_changed.connect(update_scale)
 	update_scale()
 
 func update_scale() -> void:
-	theme.default_font_size = Globals.TEXT_MIN_SCALE * Globals.tool_bar_scale
-	icon.custom_minimum_size = ICON_SIZE * Globals.tool_bar_scale
+	theme.default_font_size = Globals.TEXT_MIN_SCALE * Globals.toolbar_scale
+	icon.custom_minimum_size = ICON_SIZE * Globals.toolbar_scale
 
 func show_diff(action: Action) -> void:
 	var value: int
@@ -59,14 +59,13 @@ func update_count() -> void:
 		hide()
 		return
 	
+	var true_count = Globals.player.tools[tool]
+	
 	if not visible:
-		set_count_text(Globals.player.tools[tool])
-		count.modulate = Color.WHITE
+		set_count_text(true_count)
 		show()
-		return
 	
 	var count_val = count.text as int
-	var true_count = Globals.player.tools[tool]
 	if count_val == true_count:
 		count.modulate = Color.WHITE
 		return

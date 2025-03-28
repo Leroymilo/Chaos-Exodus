@@ -8,6 +8,8 @@ class_name SaveData
 
 @export_storage var position: Vector2i
 @export_storage var tools: Dictionary[Globals.Tool, int]
+@export_storage var chaos_pos: int
+@export_storage var chaos_step: int
 
 @export_storage var events_data: Dictionary[String, EventSaveData] = {}
 # event_id -> event_data
@@ -56,8 +58,9 @@ func has_event_choice(event_id: String, branch_id: String) -> bool:
 	return false
 
 func save() -> void:
-	print("save")
-	Globals.save_data.position = Globals.player.tile_pos
-	Globals.save_data.tools = Globals.player.tools
+	position = Globals.player.tile_pos
+	tools = Globals.player.tools
+	chaos_pos = Globals.chaos.tile_pos
+	chaos_step = Globals.chaos.cur_step
 	ResourceSaver.save(Globals.save_data, "res://saves/demo_save.tres")
 	pass

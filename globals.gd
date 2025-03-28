@@ -25,11 +25,12 @@ var journal_scale := 2:
 	set(value):
 		journal_scale = value
 		journal_scale_changed.emit()
-signal tool_bar_scale_changed()
-var tool_bar_scale := 2:
+signal toolbar_scale_changed()
+var toolbar_scale := 2:
 	set(value):
-		tool_bar_scale = value
-		tool_bar_scale_changed.emit()
+		toolbar_scale = value
+		toolbar_scale_changed.emit()
+
 
 signal show_grid_changed(show: bool)
 var show_grid := true:
@@ -40,14 +41,15 @@ var show_grid := true:
 var sort_by_last_used := true
 
 signal writing_speed_changed()
-var writing_speed := 40:
+var writing_speed := 40:	# in char/s
 	set(value):
 		writing_speed = value
 		writing_speed_changed.emit()
-
+var scroll_delay := 0.05	# in seconds
 # Global Variables
 
 var player: Player
+var chaos: Chaos
 var save_data: SaveData
 
 enum Controller {Map, Journal, PauseMenu}

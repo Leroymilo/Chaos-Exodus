@@ -22,9 +22,15 @@ const EventScene: PackedScene = preload("res://scenes/game/event.tscn")
 		if region != null:
 			make_tiles()
 			make_events()
+			Globals.chaos.step_count = region.chaos_delay
 
 var tile_map: Dictionary[Vector2i, Tile]
 var event_map: Dictionary[Vector2i, Event]
+
+func _ready() -> void:
+	Globals.player = %Player
+	Globals.chaos = %Chaos
+	Globals.chaos.time_cache = Globals.player.tools[Globals.Tool.Time_]
 
 func make_tiles():
 	for i in region.tiles.size():
@@ -44,6 +50,7 @@ func make_events():
 		event_map[pos] = new_event
 		events.add_child(new_event)
 
+
 func _input(event: InputEvent) -> void:
 	if Globals.has_control != Globals.Controller.Map: return
 	
@@ -57,8 +64,6 @@ func _input(event: InputEvent) -> void:
 		Globals.player.move_target(Vector2i.DOWN)
 	elif event.is_action_pressed("ui_left"):
 		Globals.player.move_target(Vector2i.LEFT)
-	elif event.is_action_pressed("ui_cancel"):
-		Globals.player.target = Vector2i.ZERO
 	
 	 # Choosing action
 	

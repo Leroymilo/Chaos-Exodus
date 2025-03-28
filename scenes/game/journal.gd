@@ -36,7 +36,8 @@ func _input(event: InputEvent) -> void:
 	if Globals.has_control != Globals.Controller.Journal: return
 	if page_l.in_event or page_r.in_event: return
 	
-	if event.is_action_pressed("open_journal"):
+	if event.is_action_pressed("open_journal")\
+	or event.is_action_pressed("ui_cancel"):
 		await get_tree().process_frame
 		close()
 	elif event.is_action_pressed("flip_right"):

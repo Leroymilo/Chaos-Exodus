@@ -10,9 +10,6 @@ const ToolDisplay := preload("res://scenes/game/tool_display.tscn")
 @onready var anim_player := $AnimationPlayer
 
 func _ready() -> void:
-	Globals.player = map.get_node("%Player")
-	Globals.player.tile_pos = Globals.save_data.position
-	Globals.player.tools = Globals.save_data.tools
 	map.region = Globals.save_data.region
 	
 	for tool in Globals.Tool.values():
@@ -24,7 +21,7 @@ func _ready() -> void:
 	
 	Globals.show_action.connect(show_action_desc)
 	Globals.map_scale_changed.connect(update_scales)
-	Globals.tool_bar_scale_changed.connect(update_scales)
+	Globals.toolbar_scale_changed.connect(update_scales)
 	Globals.journal_scale_changed.connect(update_scales)
 	
 	update_scales()
@@ -33,16 +30,16 @@ func _ready() -> void:
 
 func update_scales() -> void:
 	# map
-	var vp: SubViewport = map.get_parent()
-	vp.size = vp.size_2d_override * Globals.map_scale
+	var vpc: SubViewportContainer = map.get_parent().get_parent()
+	vpc.scale = Vector2.ONE * Globals.map_scale
 	
 	# journal
-	vp = journal.get_parent()
+	var vp: SubViewport = journal.get_parent()
 	vp.size = vp.size_2d_override * Globals.journal_scale
 	
 	# action description
 	action_desc.add_theme_font_size_override(
-		"font_size", Globals.TEXT_MIN_SCALE * Globals.tool_bar_scale)
+		"font_size", Globals.TEXT_MIN_SCALE * Globals.toolbar_scale)
 
 func show_action_desc(action: Action) -> void:
 	action_desc.text = action.description
@@ -61,8 +58,12 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed("open_journal"):
 			await get_tree().process_frame
 			journal.open_to_last()
-			
+		
+		elif event.is_action_pressed("ui_cancel"):
+			await get_tree().process_frame
+			pause_menu.open()
 
-	elif Globals.has_control != Globals.Controller.PauseMenu:
+	if Globals.has_control != Globals.Controller.PauseMenu:
 		if event.is_action_pressed("pause"):
+			await get_tree().process_frame
 			pause_menu.open()

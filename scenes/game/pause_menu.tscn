@@ -55,7 +55,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_k8vbq")
 
 [node name="VBoxContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/Settings/PanelContainer"]
 layout_mode = 2
-columns = 2
+columns = 3
 
 [node name="MapScaleLabel" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -65,12 +65,22 @@ text = "Map Scale: "
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../../../../Buttons/HBoxContainer/Exit")
+focus_neighbor_bottom = NodePath("../ToolbarScaleSlider")
+focus_next = NodePath("../ToolbarScaleSlider")
+focus_previous = NodePath("../../../../Buttons/HBoxContainer/Exit")
 min_value = 1.0
 max_value = 3.0
 value = 2.0
 rounded = true
 tick_count = 3
 ticks_on_borders = true
+
+[node name="MapScaleValue" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x2"
+horizontal_alignment = 1
 
 [node name="ToolbarScaleLabel" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -80,12 +90,22 @@ text = "Toolbar Scale: "
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../MapScaleSlider")
+focus_neighbor_bottom = NodePath("../JournalScaleSlider")
+focus_next = NodePath("../JournalScaleSlider")
+focus_previous = NodePath("../MapScaleSlider")
 min_value = 1.0
 max_value = 3.0
 value = 2.0
 rounded = true
 tick_count = 3
 ticks_on_borders = true
+
+[node name="ToolbarScaleValue" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x2"
+horizontal_alignment = 1
 
 [node name="JournalScaleLabel" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -95,12 +115,22 @@ text = "Journal Scale: "
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ToolbarScaleSlider")
+focus_neighbor_bottom = NodePath("../GridToggleCheck")
+focus_next = NodePath("../GridToggleCheck")
+focus_previous = NodePath("../ToolbarScaleSlider")
 min_value = 1.0
 max_value = 3.0
 value = 2.0
 rounded = true
 tick_count = 3
 ticks_on_borders = true
+
+[node name="JournalScaleValue" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "x2"
+horizontal_alignment = 1
 
 [node name="GridToggleLabel" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -110,7 +140,17 @@ text = "Toggle Grid: "
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../JournalScaleSlider")
+focus_neighbor_bottom = NodePath("../WritingSpeedSlider")
+focus_next = NodePath("../WritingSpeedSlider")
+focus_previous = NodePath("../JournalScaleSlider")
 button_pressed = true
+
+[node name="GridToggleValue" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "On"
+horizontal_alignment = 1
 
 [node name="WritingSpeedLabel" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -119,6 +159,10 @@ text = "Writing Speed:"
 [node name="WritingSpeedSlider" type="HSlider" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../GridToggleCheck")
+focus_neighbor_bottom = NodePath("../ScrollDelaySlider")
+focus_next = NodePath("../ScrollDelaySlider")
+focus_previous = NodePath("../GridToggleCheck")
 min_value = 10.0
 step = 10.0
 value = 40.0
@@ -126,19 +170,75 @@ rounded = true
 tick_count = 4
 ticks_on_borders = true
 
-[node name="ExitToTitle" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
+[node name="WritingSpeedValue" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(126, 0)
+layout_mode = 2
+text = "40 c/s"
+horizontal_alignment = 1
+
+[node name="ScrollDelayLabel" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Scroll Delay:"
+
+[node name="ScrollDelaySlider" type="HSlider" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+focus_neighbor_top = NodePath("../WritingSpeedSlider")
+focus_neighbor_bottom = NodePath("../../../../Buttons/HBoxContainer/Back")
+focus_next = NodePath("../../../../Buttons/HBoxContainer/Back")
+focus_previous = NodePath("../WritingSpeedSlider")
+min_value = 0.01
+max_value = 0.1
+step = 0.01
+value = 0.04
+tick_count = 4
+ticks_on_borders = true
+
+[node name="ScrollDelayValue" type="Label" parent="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0.04 s"
+horizontal_alignment = 1
+
+[node name="Buttons" type="CenterContainer" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/ExitToTitle"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Buttons"]
 layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Back" type="Button" parent="PanelContainer/VBoxContainer/Buttons/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../Exit")
+focus_neighbor_top = NodePath("../../../Settings/PanelContainer/VBoxContainer/ScrollDelaySlider")
+focus_neighbor_right = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../../../Settings/PanelContainer/VBoxContainer/MapScaleSlider")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../../../Settings/PanelContainer/VBoxContainer/ScrollDelaySlider")
 theme = ExtResource("2_k8vbq")
 theme_override_font_sizes/font_size = 48
-text = "Exit To Title"
+text = "Back to Game"
 
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/MapScaleSlider" to="." method="_on_scale_changed" binds= [0]]
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/ToolbarScaleSlider" to="." method="_on_scale_changed" binds= [1]]
-[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/JournalScaleSlider" to="." method="_on_scale_changed" binds= [2]]
+[node name="Exit" type="Button" parent="PanelContainer/VBoxContainer/Buttons/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Back")
+focus_neighbor_top = NodePath("../../../Settings/PanelContainer/VBoxContainer/ScrollDelaySlider")
+focus_neighbor_right = NodePath("../Back")
+focus_neighbor_bottom = NodePath("../../../Settings/PanelContainer/VBoxContainer/MapScaleSlider")
+focus_next = NodePath("../../../Settings/PanelContainer/VBoxContainer/MapScaleSlider")
+focus_previous = NodePath("../Back")
+theme = ExtResource("2_k8vbq")
+theme_override_font_sizes/font_size = 48
+text = "Exit to Title"
+
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/MapScaleSlider" to="." method="_on_scale_changed" binds= ["map_scale"]]
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/ToolbarScaleSlider" to="." method="_on_scale_changed" binds= ["toolbar_scale"]]
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/JournalScaleSlider" to="." method="_on_scale_changed" binds= ["journal_scale"]]
 [connection signal="toggled" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/GridToggleCheck" to="." method="_on_grid_toggled"]
 [connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/WritingSpeedSlider" to="." method="_on_writing_speed_schanged"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/ExitToTitle/Button" to="." method="_on_exit_to_title"]
+[connection signal="value_changed" from="PanelContainer/VBoxContainer/Settings/PanelContainer/VBoxContainer/ScrollDelaySlider" to="." method="_on_scroll_delay_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/HBoxContainer/Back" to="." method="close"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/HBoxContainer/Exit" to="." method="_on_exit_to_title"]

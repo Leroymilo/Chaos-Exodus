@@ -4,14 +4,16 @@ var game: PackedScene 	= preload("res://scenes/game/game.tscn")
 var scenario: Scenario 	= preload("res://scenarios/Demo/data.tres")
 
 @onready var continue_butt := %Continue
+@onready var start_butt := %Start
 
 func _ready() -> void:
 	if FileAccess.file_exists("res://saves/demo_save.tres"):
 		Globals.save_data = load("res://saves/demo_save.tres")
 		continue_butt.disabled = false
+		continue_butt.grab_focus()
+	else: start_butt.grab_focus()
 
 func _on_start_pressed() -> void:
-	
 	Globals.save_data = SaveData.new()
 	Globals.save_data.load_from_scenario(scenario)
 	get_tree().change_scene_to_packed(game)
