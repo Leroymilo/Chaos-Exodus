@@ -18,6 +18,7 @@ func open_to_event(event_nb: int) -> void:
 	page_l.load_page(index_l)
 	page_r.load_page(index_l+1)
 	focused = event_nb
+	update_page_focus()
 
 func open_to_last() -> void:
 	open_to_event(Globals.save_data.events_order.size()-1)
@@ -27,6 +28,8 @@ func open() -> void:
 	show()
 	opening.emit(true)
 	Globals.show_action.emit(Action.empty_action)
+	await anim_player.animation_finished
+	background.flip_h = focused % 2 
 
 func close():
 	anim_player.play("close")
@@ -48,6 +51,7 @@ func _input(event: InputEvent) -> void:
 			else:
 				background.flip_h = true
 			focused += 1
+			update_page_focus()
 	elif event.is_action_pressed("flip_left"):
 		if focused > 0 and not anim_player.is_playing():
 			if focused % 2 == 0:
@@ -55,3 +59,8 @@ func _input(event: InputEvent) -> void:
 			else:
 				background.flip_h = false
 			focused -= 1
+			update_page_focus()
+
+func update_page_focus() -> void:
+	page_l.focused = not (focused % 2)
+	page_r.focused = focused % 2

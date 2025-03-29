@@ -48,6 +48,10 @@ func move_target(direction: Vector2i) -> void:
 			target = Vector2i.ZERO
 		else:
 			target = direction
+			
+	if get_target().x < Globals.chaos.tile_pos:
+		target = Vector2i.ZERO
+		# can't go into chaos
 
 func get_target() -> Vector2i:
 	return target + tile_pos

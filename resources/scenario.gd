@@ -9,3 +9,4 @@ class_name Scenario
 	Globals.Tool.Time_: 0,
 	Globals.Tool.Energy: 5
 }
+@export var start_chaos_pos := 0

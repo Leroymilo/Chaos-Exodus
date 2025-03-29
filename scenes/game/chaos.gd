@@ -6,9 +6,11 @@ const TIME := Globals.Tool.Time_
 signal chaos_moved()
 
 @onready var wave := $Wave
-@onready var arrow_label := %Arrow
+@onready var distance := %Distance
 @onready var count := %Count
 
+var offset: int
+var tile_pos := 0
 var time_cache := 0
 var step_count := 5:
 	set(value):
@@ -27,13 +29,12 @@ func _ready() -> void:
 	
 	Globals.update_tools.connect(time_changed)
 
-var tile_pos: int = 0
-
 func _process(delta: float) -> void:
 	if step_count == 0: return
 	var diff = get_target_pos() - wave.position.x
 	wave.position.x += diff * exp( -delta * 100)
-	arrow_label.visible = wave.global_position.x < 0
+	distance.visible = tile_pos + offset < 0
+	distance.text = "< " + str(-tile_pos - offset)
 
 func get_target_pos() -> float:
 	return Globals.TILE_SIZE.x * (tile_pos + float(cur_step)/step_count)

@@ -28,4 +28,5 @@ start_tools = Dictionary[int, int]({
 0: 0,
 1: 5
 })
+start_chaos_pos = -2
 metadata/_custom_type_script = "uid://cy20g4fvioddd"

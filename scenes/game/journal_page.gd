@@ -19,6 +19,7 @@ var scrolling := 0	# 1 is down, -1 is up
 var data: EventSaveData
 var index := -1
 
+var focused := false
 var writing_start_time := 0
 var chars := 0
 var script_tree: ScriptTree
@@ -111,11 +112,11 @@ func _process(delta: float) -> void:
 	if current_mode == INPUT_MODE.Choose and ready_to_write:
 		update_text()
 	
-	if scrolling != 0:
+	if focused and scrolling != 0:
 		until_new_scroll -= delta
 		if until_new_scroll <= 0:
 			until_new_scroll = Globals.scroll_delay
-			entry_text.get_v_scroll_bar().value += scrolling * 12
+			update_scroll_bar()
 
 func _input(event: InputEvent) -> void:
 	if Globals.has_control != Globals.Controller.Journal: return
@@ -129,17 +130,26 @@ func _input(event: InputEvent) -> void:
 		if branch_node.handle_event(event):
 			update_text()
 	
-	if event.is_action_pressed("ui_down") and scrolling != 1:
-		scrolling = 1
-		entry_text.get_v_scroll_bar().value += 12
-		until_new_scroll = 10 * Globals.scroll_delay
-	elif event.is_action_pressed("ui_up") and scrolling != -1:
-		scrolling = -1
-		entry_text.get_v_scroll_bar().value -= 12
-		until_new_scroll = 10 * Globals.scroll_delay
-	elif event.is_action_released("ui_up")\
+	if event.is_action_released("ui_up")\
 	or event.is_action_released("ui_down"):
 		scrolling = 0
+	
+	if focused:
+		if event.is_action_pressed("ui_down") and scrolling != 1:
+			scrolling = 1
+			update_scroll_bar()
+			until_new_scroll = 10 * Globals.scroll_delay
+		elif event.is_action_pressed("ui_up") and scrolling != -1:
+			scrolling = -1
+			update_scroll_bar()
+			until_new_scroll = 10 * Globals.scroll_delay
+			entry_text.scroll_following = false
+
+func update_scroll_bar() -> void:
+	var scroll_bar: VScrollBar= entry_text.get_v_scroll_bar()
+	scroll_bar.value += scrolling * 12
+	if scroll_bar.value + scroll_bar.page == scroll_bar.max_value:
+		entry_text.scroll_following = true
 
 func update_text() -> void:
 	entry_text.text = data.finished_text + script_tree.get_text(chars).text

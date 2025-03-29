@@ -104,5 +104,5 @@ Vector2i(7, 1): SubResource("Resource_btvur"),
 Vector2i(7, 3): SubResource("Resource_vc5sh"),
 Vector2i(9, 2): SubResource("Resource_5e5h8")
 })
-chaos_delay = 0
+chaos_delay = 5
 metadata/_custom_type_script = "uid://b6w03ajj73tdd"

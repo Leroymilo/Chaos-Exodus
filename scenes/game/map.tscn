@@ -24,3 +24,4 @@ z_index = 1024
 
 [connection signal="moved" from="Player" to="." method="_on_player_moved"]
 [connection signal="target_moved" from="Player" to="." method="_on_player_target_moved"]
+[connection signal="chaos_moved" from="Chaos" to="." method="check_game_over"]

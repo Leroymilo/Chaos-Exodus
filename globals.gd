@@ -14,6 +14,8 @@ enum Tool {
 	Torch, Machete, Rope, Soup
 }
 
+const PLAYER_RANGE := Vector2i(1, 3)
+
 # Settings
 signal map_scale_changed()
 var map_scale := 2:

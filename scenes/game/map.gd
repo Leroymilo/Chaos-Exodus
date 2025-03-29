@@ -26,11 +26,19 @@ const EventScene: PackedScene = preload("res://scenes/game/event.tscn")
 
 var tile_map: Dictionary[Vector2i, Tile]
 var event_map: Dictionary[Vector2i, Event]
+var offset := 0
 
 func _ready() -> void:
 	Globals.player = %Player
 	Globals.chaos = %Chaos
 	Globals.chaos.time_cache = Globals.player.tools[Globals.Tool.Time_]
+	
+	var pos = Globals.player.tile_pos
+	offset = clamp(offset,
+		-(pos.x - Globals.PLAYER_RANGE.x),
+		-(pos.x - Globals.PLAYER_RANGE.y))
+	Globals.chaos.offset = offset
+	position.x = offset * Globals.TILE_SIZE.x
 
 func make_tiles():
 	for i in region.tiles.size():
@@ -50,6 +58,9 @@ func make_events():
 		event_map[pos] = new_event
 		events.add_child(new_event)
 
+func _process(delta: float) -> void:
+	var diff = offset * Globals.TILE_SIZE.x - position.x
+	position.x += diff * exp( -delta * 100)
 
 func _input(event: InputEvent) -> void:
 	if Globals.has_control != Globals.Controller.Map: return
@@ -90,3 +101,13 @@ func _on_player_moved() -> void:
 	var pos = Globals.player.tile_pos
 	if event_map.has(pos) and event_map[pos].triggerable:
 		event_map[pos].trigger()
+	offset = clamp(offset,
+		-(pos.x - Globals.PLAYER_RANGE.x),
+		-(pos.x - Globals.PLAYER_RANGE.y))
+	Globals.chaos.offset = offset
+
+func check_game_over() -> void:
+	await get_tree().process_frame	# waits for player movement to complete
+	if Globals.chaos.tile_pos > Globals.player.tile_pos.x:
+		# TODO
+		print("Game Over!")

@@ -22,6 +22,7 @@ func load_from_scenario(p_scenario: Scenario) -> void:
 	region = scenario.start_region
 	position = scenario.start_pos
 	tools = scenario.start_tools
+	chaos_pos = scenario.start_chaos_pos
 	
 	# adding initial event
 	var event_save_data := EventSaveData.new()
