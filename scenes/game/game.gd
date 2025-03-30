@@ -12,10 +12,10 @@ const ToolDisplay := preload("res://scenes/game/tool_display.tscn")
 func _ready() -> void:
 	map.region = Globals.save_data.region
 	
-	for tool in Globals.Tool.values():
+	for tool in Globals.save_data.scenario.tools:
 		var new_tool = ToolDisplay.instantiate()
 		new_tool.tool = tool
-		if not Globals.player.tools.has(tool):
+		if not Globals.player.tools.has(tool.name):
 			new_tool.hide()
 		tools.add_child(new_tool)
 	

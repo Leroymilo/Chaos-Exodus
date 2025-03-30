@@ -9,11 +9,6 @@ const DIRS := {
 }
 const TEXT_MIN_SCALE := 12
 
-enum Tool {
-	Time_, Energy, Morale,
-	Torch, Machete, Rope, Soup
-}
-
 const PLAYER_RANGE := Vector2i(1, 3)
 
 # Settings
@@ -32,7 +27,6 @@ var toolbar_scale := 2:
 	set(value):
 		toolbar_scale = value
 		toolbar_scale_changed.emit()
-
 
 signal show_grid_changed(show: bool)
 var show_grid := true:
@@ -60,7 +54,7 @@ var has_control := Controller.Map
 # Communication Signals
 
 @warning_ignore("unused_signal")
-signal blink_tool(tool: Tool)
+signal blink_tool(tool: String)
 @warning_ignore("unused_signal")
 signal update_tools()
 @warning_ignore("unused_signal")

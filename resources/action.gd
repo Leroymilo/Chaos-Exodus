@@ -5,17 +5,18 @@ static var empty_action: Action
 static var no_action: Action
 static var no_move: Action
 
-@export var tools: Dictionary[Globals.Tool, int] = {}
+@export var tools: Dictionary[String, int] = {}
 @export var condition: Condition = TrueCondition.new()
 @export var is_move: bool = true
 @export var description: String = ""
 
 static func _static_init() -> void:
 	empty_action = new()
-	no_action = new()
-	no_action.description = "No action on this tile."
 	no_move = new()
 	no_move.description = "No move to this tile."
+	no_action = new()
+	no_action.is_move = false
+	no_action.description = "No action on this tile."
 
 func is_valid(move: bool) -> bool:
 	# does not need enough tools to be valid, only unlock them.

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c52clu0v4pnx2"]
 
 [ext_resource type="Script" uid="uid://ckr6pn3p7pywd" path="res://scenes/game/journal_page.gd" id="1_8vtsq"]
-[ext_resource type="Theme" uid="uid://b0g7ak0qqm4el" path="res://assets/themes/rich_text_label_theme.tres" id="2_0m82y"]
+[ext_resource type="Theme" uid="uid://b0g7ak0qqm4el" path="res://assets/ui_themes/rich_text_label_theme.tres" id="2_0m82y"]
 
 [node name="JournalPage" type="Control"]
 layout_mode = 3

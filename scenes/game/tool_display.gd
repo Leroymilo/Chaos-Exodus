@@ -13,21 +13,17 @@ var digit_count: int = 3
 const BLINK := 8
 var blink_count := 0
 
-var tool: Globals.Tool:
+var tool: Tool:
 	set(value):
 		if not is_node_ready(): await ready
 		
 		tool = value
-		var tool_name: String = Globals.Tool.find_key(tool).to_lower()
-		var texture_path := "res://assets/icons/tools/{0}.png".format([tool_name])
-		icon.texture = load(texture_path)
+		icon.texture = tool.icon
 		
-		if tool == Globals.Tool.Time_:
-			digit_count = 4
-		else: digit_count = 3
+		digit_count = str(tool.max_val).length()
 		
-		if Globals.player.tools.has(tool):
-			set_count_text(Globals.player.tools[tool])
+		if Globals.player.tools.has(tool.name):
+			set_count_text(Globals.player.tools[tool.name])
 		else: set_count_text(0)
 
 func _ready() -> void:
@@ -43,8 +39,8 @@ func update_scale() -> void:
 
 func show_diff(action: Action) -> void:
 	var value: int
-	if action.tools.has(tool):
-		value = action.tools[tool]
+	if action.tools.has(tool.name):
+		value = action.tools[tool.name]
 	else: value = 0
 	
 	if value == 0:
@@ -55,11 +51,11 @@ func show_diff(action: Action) -> void:
 	set_change_text(value)
 
 func update_count() -> void:
-	if not Globals.player.tools.has(tool):
+	if not Globals.player.tools.has(tool.name):
 		hide()
 		return
 	
-	var true_count = Globals.player.tools[tool]
+	var true_count = Globals.player.tools[tool.name]
 	
 	if not visible:
 		set_count_text(true_count)
@@ -79,8 +75,8 @@ func update_count() -> void:
 	
 	update_timer.start()
 
-func start_blink(p_tool: Globals.Tool) -> void:
-	if p_tool == tool:
+func start_blink(p_tool: String) -> void:
+	if p_tool == tool.name:
 		blink_count = BLINK
 		blink()
 
@@ -104,10 +100,7 @@ func set_change_text(value: int) -> void:
 	else: change.text = str(value)
 
 func get_color(value_a: int, value_b: int = 0) -> Color:
-	if tool == Globals.Tool.Time_:
+	if tool.is_good == (value_a < value_b):
 		return Color.RED
 	else:
-		if value_a < value_b:
-			return Color.RED
-		else:
-			return Color.GREEN
+		return Color.GREEN

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://chl3ioonxrxu3"]
+
+[ext_resource type="Script" uid="uid://b8ry784ysocss" path="res://scenes/game/map/map.gd" id="1_4xfga"]
+[ext_resource type="PackedScene" uid="uid://dbmfmtknjwuit" path="res://scenes/game/map/player.tscn" id="2_paxxb"]
+[ext_resource type="PackedScene" uid="uid://byi0ek3vreo6y" path="res://scenes/game/map/chaos.tscn" id="3_043wi"]
+
+[node name="Map" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_4xfga")
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Events" type="Node2D" parent="."]
+z_index = 1024
+
+[node name="Player" parent="." instance=ExtResource("2_paxxb")]
+unique_name_in_owner = true
+z_index = 1024
+position = Vector2(128, 128)
+
+[node name="Chaos" parent="." instance=ExtResource("3_043wi")]
+unique_name_in_owner = true
+z_index = 1024
+
+[connection signal="moved" from="Player" to="." method="_on_player_moved"]
+[connection signal="target_moved" from="Player" to="." method="_on_player_target_moved"]
+[connection signal="chaos_moved" from="Chaos" to="." method="check_game_over"]

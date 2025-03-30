@@ -17,6 +17,7 @@ var until_new_scroll := 0.0
 var scrolling := 0	# 1 is down, -1 is up
 
 var data: EventSaveData
+var event_id: String
 var index := -1
 
 var focused := false
@@ -41,8 +42,10 @@ func load_page(p_index: int) -> void:
 		current_mode = INPUT_MODE.None
 		return
 	
-	data = Globals.save_data.get_event(index)
-	day_counter.text = "Day {0}".format([data.turn])
+	event_id = Globals.save_data.events_order[index]
+	data = Globals.save_data.events_data[event_id]
+	
+	day_counter.text = "Day {0}".format([data.get_turn()])
 	
 	if data.finished:
 		entry_text.text = data.finished_text
@@ -83,7 +86,7 @@ func choice_started(value: ScriptBranch) -> void:
 	value.choice_started.disconnect(choice_started)
 
 func choice_made(branch_id: String) -> void:
-	Globals.choice_taken.emit(data.event_data.id, branch_id)
+	Globals.choice_taken.emit(event_id, branch_id)
 	var new_path := data.take_branch(branch_id)
 	if new_path != "":
 		data.script_queue.append(new_path)

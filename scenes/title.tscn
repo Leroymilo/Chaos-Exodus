@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://q3ha2tsamupt"]
 
 [ext_resource type="Script" uid="uid://ceap0hg7j6ikn" path="res://scenes/title.gd" id="1_4ignj"]
-[ext_resource type="Theme" uid="uid://cgkvcmta8o53p" path="res://assets/themes/settings.tres" id="2_wosw1"]
+[ext_resource type="Theme" uid="uid://cgkvcmta8o53p" path="res://assets/ui_themes/settings.tres" id="2_wosw1"]
 
 [node name="Title" type="Control"]
 layout_mode = 3

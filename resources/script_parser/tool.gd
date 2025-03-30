@@ -1,4 +1,4 @@
-extends ScriptBase
+extends ScriptTrigger
 class_name ScriptTool
 # handles anything tool related
 
@@ -7,9 +7,8 @@ class_name ScriptTool
 enum Mode {enable, disable, add, set_}
 
 var mode: Mode
-var tool: Globals.Tool
+var tool: String
 var count := 0
-var triggered: bool = false
 
 var err_msg: String = ""
 
@@ -24,11 +23,10 @@ func parse(raw_text: String, i: int) -> int:
 	
 	i = j+1
 	j = raw_text.find(':', i)
-	var tool_name := raw_text.substr(i, j-i)
-	if not Globals.Tool.has(tool_name):
-		err_msg = "Invalid tool name: " + tool_name
+	tool = raw_text.substr(i, j-i)
+	if Globals.save_data.scenario.get_tool(tool) == null:
+		err_msg = "Invalid tool name: " + tool
 		return raw_text.find('}', i) + 1
-	tool = Globals.Tool[tool_name]
 	
 	i = j+1
 	j = raw_text.find('}', i)

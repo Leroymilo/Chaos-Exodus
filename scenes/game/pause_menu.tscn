@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c57orfsgl2g74"]
 
 [ext_resource type="Script" uid="uid://b4x7pfuoklt7m" path="res://scenes/game/pause_menu.gd" id="1_aj248"]
-[ext_resource type="Theme" uid="uid://cgkvcmta8o53p" path="res://assets/themes/settings.tres" id="2_k8vbq"]
+[ext_resource type="Theme" uid="uid://cgkvcmta8o53p" path="res://assets/ui_themes/settings.tres" id="2_k8vbq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_61cmk"]
 bg_color = Color(0.22, 0.22, 0.22, 0.313726)
